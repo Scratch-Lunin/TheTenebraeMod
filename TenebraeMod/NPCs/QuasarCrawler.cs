@@ -65,7 +65,10 @@ namespace TenebraeMod.NPCs
 			}
 
 			if (attackCooldown >= 60) {
-				if (Main.netMode != 2) {Main.projectile[laser].Kill(); }
+				if (Main.netMode != 2 && laser != -1) {
+					Main.projectile[laser].Kill();
+					laser = -1;
+				}
 				attackCooldown = -30;
 			}
 
