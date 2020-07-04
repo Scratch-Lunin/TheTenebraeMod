@@ -1,0 +1,16 @@
+The Tenebrae Mod is a mod that aims to improve the overall Terraria experience by adding a variety of enemies, bosses, items, and even a new biome.
+The first public version of the mod was released on the 3rd of June, 2020.
+This mod is currently W.I.P.
+
+This mod was created by Scratch Lunin (me).
+
+-Developers-
+Programmers: OrangeMonkey, turingcomplete30, grayont, Stevie
+Spriters: Scratch Lunin, Lonely Star, FrostySpectre, eten, Yon
+Musicians: LBF, A44, PokePoke
+
+Beta v1.0 Changelog
+Mod beta released
+Added the Mecharang, an upgraded version of the Skelerang
+Added many new spiky ball varients, from Wooden Spiky Balls to Luminite Spiky Balls
+Fixed the AI of the Nebulaic Watcher
