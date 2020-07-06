@@ -22,8 +22,8 @@ namespace TenebraeMod.Items.Weapons
             item.useAnimation = 25;
             item.noUseGraphic = true;
             item.useStyle = 1;
-            item.knockBack = 8;
-            item.value = 1500;
+            item.knockBack = 3;
+            item.value = 8;
             item.rare = 3;
             item.shootSpeed = 12f;
             item.shoot = mod.ProjectileType ("SkelerangProjectile");
