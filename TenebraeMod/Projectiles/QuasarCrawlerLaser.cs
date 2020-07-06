@@ -11,14 +11,14 @@ namespace TenebraeMod.Projectiles
 	// The following laser shows a channeled ability, after charging up the laser will be fired
 	// Using custom drawing, dust effects, and custom collision checks for tiles
 
-	// Blatantly copied from my Polarities code which is blatantly copied from ExampleMod because I can't code to save my life
+	// Blatantly copied from ExampleMod because I can't code to save my life
 
 	public class QuasarCrawlerLaser : ModProjectile
 	{
 		// Use a different style for constant so it is very clear in code when a constant is used
 
-		//The distance charge particle from the npc center
-		private const float MOVE_DISTANCE = 20f;
+		//The distance charge particle from the pixie center
+		private const float MOVE_DISTANCE = 10f;
 
 		// The actual distance is stored in the ai0 field
 		// By making a property to handle this it makes our life easier, and the accessibility more readable
@@ -27,7 +27,7 @@ namespace TenebraeMod.Projectiles
 			set => projectile.ai[0] = value;
 		}
 
-		//The npc which owns this laser
+		//The sun pixie which owns this laser
 		public int owner {
 			get => (int)projectile.ai[1];
 			set => projectile.ai[1] = value;

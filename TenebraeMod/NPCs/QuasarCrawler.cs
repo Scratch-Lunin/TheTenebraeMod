@@ -61,16 +61,11 @@ namespace TenebraeMod.NPCs
 					Main.PlaySound(SoundID.Item, npc.position, 122);
 					laser = Projectile.NewProjectile(npc.Center.X,npc.Center.Y,npc.velocity.X,npc.velocity.Y,ProjectileType<QuasarCrawlerLaser>(),100,2f,Main.myPlayer,0,npc.whoAmI);
 				}
-				if (laser != -1) {
-					Main.projectile[laser].velocity = (new Vector2(-1,0)).RotatedBy(npc.rotation);
-				}
+				Main.projectile[laser].velocity = (new Vector2(-1,0)).RotatedBy(npc.rotation);
 			}
 
 			if (attackCooldown >= 60) {
-				if (Main.netMode != 2 && laser != -1) {
-					Main.projectile[laser].Kill();
-					laser = -1;
-				}
+				if (Main.netMode != 2) {Main.projectile[laser].Kill(); }
 				attackCooldown = -30;
 			}
 

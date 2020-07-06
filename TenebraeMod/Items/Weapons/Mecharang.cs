@@ -6,27 +6,27 @@ using Terraria.ModLoader;
  
 namespace TenebraeMod.Items.Weapons
 {
-    public class Skelerang : ModItem
+    public class Mecharang : ModItem
     {
         public override void SetStaticDefaults() {
-            DisplayName.SetDefault("Skelerang");
-            Tooltip.SetDefault("'It's just an extremely bent rib.'");
+            DisplayName.SetDefault("Mecharang");
+            Tooltip.SetDefault("'Now the rib shoots lasers? What kind of-'");
         }
 
         public override void SetDefaults() {
             item.melee = true;
-            item.damage = 20;
-            item.width = 20;
+            item.damage = 55;
+            item.width = 22;
             item.height = 36;
             item.useTime = 25;
             item.useAnimation = 25;
             item.noUseGraphic = true;
             item.useStyle = 1;
-            item.knockBack = 8;
-            item.value = 1500;
-            item.rare = 3;
-            item.shootSpeed = 12f;
-            item.shoot = mod.ProjectileType ("SkelerangProjectile");
+            item.knockBack = 10;
+            item.value = 75000;
+            item.rare = 5;
+            item.shootSpeed = 14f;
+            item.shoot = mod.ProjectileType ("MecharangProjectile");
             item.UseSound = SoundID.Item1;
             item.autoReuse = true;
         }
@@ -42,20 +42,15 @@ namespace TenebraeMod.Items.Weapons
             }
             return true;
         }
-       class SkelerangDrops : GlobalNPC
-{
-	public override void NPCLoot(NPC npc)
-	{
-		if(npc.type == NPCID.SkeletronHead)
-		{
-			 if (Main.rand.NextFloat() < .105f) // 10.5% chance
-                {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("Skelerang"), 1);
-                }
-            // Place added drops specific to Frankenstein here
+
+ 		public override void AddRecipes() {
+			ModRecipe recipe = new ModRecipe(mod);
+			recipe.AddIngredient(ItemID.HallowedBar, 10);
+            recipe.AddIngredient(ItemID.SoulofFright, 3);
+            recipe.AddIngredient(null, "Skelerang");
+			recipe.AddTile(134);
+			recipe.SetResult(this);
+			recipe.AddRecipe();
 		}
-		// Addtional if statements here if you would like to add drops to other vanilla npc.
-	}
-}
     }
 }

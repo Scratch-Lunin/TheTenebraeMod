@@ -1,7 +1,6 @@
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
 
 namespace TenebraeMod.Items.Accessories
@@ -10,7 +9,7 @@ namespace TenebraeMod.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Provides immunity to On Fire and 7 seconds of lava immunity");
+            Tooltip.SetDefault("Provides immunity to On Fire");
         }
 
         public override void SetDefaults()
@@ -24,8 +23,7 @@ namespace TenebraeMod.Items.Accessories
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.buffImmune[BuffID.OnFire] = true;
-            player.lavaMax += 7*60;
+            player.buffImmune[24] = true;
         }
 
         public override void AddRecipes()
