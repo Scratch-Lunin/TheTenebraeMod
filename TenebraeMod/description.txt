@@ -9,8 +9,5 @@ Programmers: OrangeMonkey, turingcomplete30, grayont, Stevie
 Spriters: Scratch Lunin, Lonely Star, FrostySpectre, eten, Yon
 Musicians: LBF, A44, PokePoke
 
-Beta v1.0 Changelog
-Mod beta released
-Added the Mecharang, an upgraded version of the Skelerang
-Added many new spiky ball varients, from Wooden Spiky Balls to Luminite Spiky Balls
-Fixed the AI of the Nebulaic Watcher
+Beta v1.2 Changelog
+Added recipes for certain vanilla chests
