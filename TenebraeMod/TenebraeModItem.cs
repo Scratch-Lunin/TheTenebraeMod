@@ -6,7 +6,8 @@ using Terraria.Graphics.Shaders;
 using static Terraria.ModLoader.ModContent;
 
 namespace TenebraeMod {
-	public class TenebraeModItem : GlobalItem {
+	public class TenebraeModItem : GlobalItem 
+    {
 		public override bool InstancePerEntity => true;
 
         public override void AddRecipes() {
@@ -40,60 +41,211 @@ namespace TenebraeMod {
             recipe.SetResult(ItemID.ShadowChest);
             recipe.AddRecipe();
 
-            recipe.AddRecipeGroup("Wood",8);
+            recipe = new ModRecipe(mod);
+            recipe.AddRecipeGroup("Wood",5);
             recipe.AddIngredient(ItemID.JungleSpores,2);
             recipe.AddRecipeGroup("IronBar",2);
             recipe.AddTile(TileID.WorkBenches);
             recipe.SetResult(ItemID.IvyChest);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Coral,8);
             recipe.AddRecipeGroup("IronBar",2);
             recipe.AddTile(TileID.WorkBenches);
             recipe.SetResult(ItemID.WaterChest);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest);
             recipe.AddIngredient(ItemID.Cobweb,8);
             recipe.AddTile(TileID.WorkBenches);
             recipe.SetResult(ItemID.WebCoveredChest);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest,5);
-            recipe.AddRecipeGroup(ItemID.SnowBlock,25);
-            recipe.AddRecipeGroup(ItemID.IceBlock,25);
-            recipe.AddRecipeGroup(ItemID.FrozenKey);
+            recipe.AddIngredient(ItemID.SnowBlock,25);
+            recipe.AddIngredient(ItemID.IceBlock,25);
+            recipe.AddIngredient(ItemID.TempleKey);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(ItemID.FrozenChest,5);
             recipe.AddRecipe();
-            
+
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest,5);
-            recipe.AddRecipeGroup(ItemID.MudBlock,25);
-            recipe.AddRecipeGroup(ItemID.JungleGrassSeeds,25);
-            recipe.AddRecipeGroup(ItemID.JungleKey);
+            recipe.AddIngredient(ItemID.MudBlock,25);
+            recipe.AddIngredient(ItemID.JungleGrassSeeds,25);
+            recipe.AddIngredient(ItemID.TempleKey);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(ItemID.JungleChest,5);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest,5);
-            recipe.AddRecipeGroup(ItemID.PearlstoneBlock,50);
-            recipe.AddRecipeGroup(ItemID.HallowedKey);
+            recipe.AddIngredient(ItemID.PearlstoneBlock,50);
+            recipe.AddIngredient(ItemID.TempleKey);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(ItemID.HallowedChest,5);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest,5);
-            recipe.AddRecipeGroup(ItemID.EbonstoneBlock,50);
-            recipe.AddRecipeGroup(ItemID.CorruptionKey);
+            recipe.AddIngredient(ItemID.EbonstoneBlock,50);
+            recipe.AddIngredient(ItemID.TempleKey);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(ItemID.CorruptionChest,5);
             recipe.AddRecipe();
             
+            recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.Chest,5);
-            recipe.AddRecipeGroup(ItemID.CrimstoneBlock,50);
-            recipe.AddRecipeGroup(ItemID.CrimsonKey);
+            recipe.AddIngredient(ItemID.CrimstoneBlock,50);
+            recipe.AddIngredient(ItemID.TempleKey);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(ItemID.CrimsonChest,5);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Frog,5);
+            recipe.AddTile(TileID.Sawmill);
+            recipe.SetResult(ItemID.FrogLeg);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Cloud,50);
+            recipe.AddIngredient(ItemID.Bottle);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.CloudinaBottle);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Cloud,25);
+            recipe.AddIngredient(ItemID.SnowBlock,25);
+            recipe.AddIngredient(ItemID.Bottle);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.BlizzardinaBottle);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Cloud,25);
+            recipe.AddIngredient(ItemID.SandBlock,25);
+            recipe.AddIngredient(ItemID.Bottle);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.SandstorminaBottle);
+            recipe.AddRecipe();
+            
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Cloud,20);
+            recipe.AddIngredient(ItemID.WhiteString,2);
+            recipe.AddIngredient(ItemID.Feather,10);
+            recipe.AddTile(TileID.SkyMill);
+            recipe.SetResult(ItemID.ShinyRedBalloon);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.OldShoe);
+            recipe.AddIngredient(ItemID.Silk,5);
+            recipe.AddIngredient(ItemID.Feather,10);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.HermesBoots);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.OldShoe);
+            recipe.AddIngredient(ItemID.Coral,5);
+            recipe.AddIngredient(ItemID.WaterWalkingPotion,5);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.WaterWalkingBoots);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.OldShoe);
+            recipe.AddIngredient(ItemID.IceBlock,25);
+            recipe.AddRecipeGroup("IronBar",2);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.IceSkates);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Silk,3);
+            recipe.AddRecipeGroup("IronBar",2);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.Aglet);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "TatteredBand");
+            recipe.AddIngredient(ItemID.JungleSpores,10);
+            recipe.AddIngredient(ItemID.Cloud,5);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.AnkletoftheWind);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Leather,5);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.OldShoe);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "TatteredBand");
+            recipe.AddIngredient(ItemID.RegenerationPotion,3);
+            recipe.AddIngredient(ItemID.LifeCrystal,1);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.BandofRegeneration);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "TatteredBand");
+            recipe.AddIngredient(ItemID.ManaRegenerationPotion,3);
+            recipe.AddIngredient(ItemID.ManaCrystal,1);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.BandofStarpower);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.Vine,3);
+            recipe.AddIngredient(ItemID.Leather,5);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.FeralClaws);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.FeralClaws);
+            recipe.AddIngredient(ItemID.Spike,10);
+            recipe.AddTile(TileID.Anvils);
+            recipe.SetResult(ItemID.ClimbingClaws);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.OldShoe);
+            recipe.AddIngredient(ItemID.Spike,10);
+            recipe.AddTile(TileID.Anvils);
+            recipe.SetResult(ItemID.ShoeSpikes);
+            recipe.AddRecipe();
+            
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.OldShoe);
+            recipe.AddIngredient(ItemID.DayBloomPlanterBox,5);
+            recipe.AddIngredient(ItemID.JungleGrassSeeds,10);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.FlowerBoots);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.PlatinumBar,3);
+            recipe.AddIngredient(ItemID.Cloud,20);
+            recipe.AddIngredient(ItemID.Feather,5);
+            recipe.AddTile(TileID.SkyMill);
+            recipe.SetResult(ItemID.LuckyHorseshoe);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.GoldBar,3);
+            recipe.AddIngredient(ItemID.Cloud,20);
+            recipe.AddIngredient(ItemID.Feather,5);
+            recipe.AddTile(TileID.SkyMill);
+            recipe.SetResult(ItemID.LuckyHorseshoe);
             recipe.AddRecipe();
         }
     }

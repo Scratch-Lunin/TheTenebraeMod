@@ -2,7 +2,7 @@ using Terraria.ModLoader;
 
 namespace TenebraeMod
 {
-	public class TenebraeMod : Mod
+	public partial class TenebraeMod : Mod
 	{
 		public TenebraeMod()
 		{
