@@ -9,11 +9,7 @@ Programmers: OrangeMonkey, turingcomplete30, grayont, Stevie
 Spriters: Scratch Lunin, Lonely Star, FrostySpectre, eten, Yon
 Musicians: LBF, A44, PokePoke
 
-v1.3 Changelog
-- Added recipes for the following items:
-Frog Leg, Cloud in a Bottle, Blizzard in a Bottle, Sandstorm in a Bottle, 
-Shiny Red Balloon, Hermes Boots, Water Walking Boots, Ice Skates, Aglet, 
-Anklet of the Wind, Old Shoe, Band of Regeneration, Band of Starpower, 
-Feral Claws, Climbing Claws, Shoe Spikes, Flower Boots, and Lucky Horseshoe
-- Added the Tattered Band as a material item
-- Made the Old Shoe a material item 
+v1.4 Changelog
+- Added the Cosmic Lens and Cosmic Fang, dropping from the Nebulaic Watcher and Quasared Crawler, currently neither has any use
+- Added the Eyebow, a drop from the Eye of Cthulhu
+- Added the Sightseeker, a mechanical upgrade to the Eyebow
