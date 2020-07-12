@@ -1,4 +1,4 @@
 displayName = Tenebrae Mod
 author = Scratch Lunin, OrangeMonkey, and turingcomplete30
-version = 1.3
-homepage = https://forums.terraria.org/index.php?threads/the-tenebrae-mod.88255/
+version = 1.4
+homepage = discord.gg/KPsFQzG
