@@ -247,6 +247,37 @@ namespace TenebraeMod {
             recipe.AddTile(TileID.SkyMill);
             recipe.SetResult(ItemID.LuckyHorseshoe);
             recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "Paper",3);
+            recipe.AddIngredient(ItemID.Leather);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.Book,3);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.SpellTome);
+            recipe.AddIngredient(ItemID.WaterCandle, 3);
+            recipe.AddIngredient(ItemID.Bone, 20);
+            recipe.AddTile(TileID.Bookcases);
+            recipe.SetResult(ItemID.WaterBolt);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.SpellTome);
+            recipe.AddIngredient(ItemID.LivingDemonFireBlock, 20);
+            recipe.AddIngredient(ItemID.SoulofNight, 15);
+            recipe.AddTile(TileID.Bookcases);
+            recipe.SetResult(ItemID.DemonScythe);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(ItemID.SpellTome);
+            recipe.AddIngredient(ItemID.CelestialMagnet);
+            recipe.AddIngredient(ItemID.Ectoplasm, 15);
+            recipe.AddTile(TileID.Bookcases);
+            recipe.SetResult(ItemID.MagnetSphere);
+            recipe.AddRecipe();
         }
     }
 }

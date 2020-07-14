@@ -45,9 +45,9 @@ namespace TenebraeMod.Items.Weapons
 
  		public override void AddRecipes() {
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.HallowedBar, 10);
-            recipe.AddIngredient(ItemID.SoulofFright, 3);
             recipe.AddIngredient(null, "Skelerang");
+            recipe.AddIngredient(ItemID.HallowedBar, 12);
+            recipe.AddIngredient(ItemID.SoulofFright, 20);
 			recipe.AddTile(134);
 			recipe.SetResult(this);
 			recipe.AddRecipe();

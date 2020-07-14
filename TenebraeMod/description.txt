@@ -13,3 +13,7 @@ v1.4 Changelog
 - Added the Cosmic Lens and Cosmic Fang, dropping from the Nebulaic Watcher and Quasared Crawler, currently neither has any use
 - Added the Eyebow, a drop from the Eye of Cthulhu
 - Added the Sightseeker, a mechanical upgrade to the Eyebow
+- Added Paper, crafted with Hay at an Anvil and water
+- Added recipes for the following items:
+Book, Water Bolt, Demon Scythe, Magnet Sphere
+- Changed the Mecharang's recipe 

@@ -10,7 +10,12 @@ namespace TenebraeMod.Items.Weapons
 {
 	public class Sightseeker : ModItem
 	{
-		public override void SetDefaults() {
+        public override void SetStaticDefaults()
+        {
+            Tooltip.SetDefault("Shoots homing mechanical arrows"+"\nSpazmarrows leave a trail of cursed flames"+"\nRetinarrows shoot lasers on contact");
+        }
+
+        public override void SetDefaults() {
 			item.damage = 40;
 			item.ranged = true;
 			item.width = 22;
@@ -39,8 +44,8 @@ namespace TenebraeMod.Items.Weapons
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemType<Eyebow>());
+            recipe.AddIngredient(ItemID.HallowedBar, 12);
             recipe.AddIngredient(ItemID.SoulofSight,20);
-            recipe.AddIngredient(ItemID.HallowedBar,12);
             recipe.AddTile(TileID.MythrilAnvil);
             recipe.SetResult(this);
             recipe.AddRecipe();
