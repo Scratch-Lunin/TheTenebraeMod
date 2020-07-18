@@ -6,7 +6,7 @@ using static Terraria.ModLoader.ModContent;
 
 namespace TenebraeMod.Items.Materials
 {
-    public class Paper : ModItem
+    public class WornCloth : ModItem
     {
         public override void SetDefaults()
         {
@@ -21,9 +21,9 @@ namespace TenebraeMod.Items.Materials
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.Hay);
-            recipe.AddTile(TileID.Anvils);
-            recipe.needWater = true;
+            recipe.AddIngredient(null, "Paper",3);
+            recipe.AddIngredient(ItemID.TatteredCloth);
+            recipe.AddTile(TileID.WorkBenches);
             recipe.SetResult(this, 3);
             recipe.AddRecipe();
         }

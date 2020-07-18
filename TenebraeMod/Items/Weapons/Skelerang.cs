@@ -42,20 +42,18 @@ namespace TenebraeMod.Items.Weapons
             }
             return true;
         }
-       class SkelerangDrops : GlobalNPC
-{
-	public override void NPCLoot(NPC npc)
-	{
-		if(npc.type == NPCID.SkeletronHead)
-		{
-			 if (Main.rand.NextFloat() < .105f) // 10.5% chance
+        class SkelerangDrops : GlobalNPC
+        {
+            public override void NPCLoot(NPC npc)
+            {
+                if (npc.type == NPCID.SkeletronHead)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("Skelerang"), 1);
+                    if (Main.rand.NextBool(3) && !Main.expertMode)
+                    {
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("Skelerang"), 1);
+                    }
                 }
-            // Place added drops specific to Frankenstein here
-		}
-		// Addtional if statements here if you would like to add drops to other vanilla npc.
-	}
-}
+            }
+        }
     }
 }
