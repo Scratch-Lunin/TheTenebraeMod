@@ -48,18 +48,18 @@ namespace TenebraeMod.NPCs
             npc.spriteDirection = npc.direction;
         }
 
-        /*public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             return (spawnInfo.player.ZoneSkyHeight && !Main.dayTime && NPC.downedMoonlord) ? (0.25f) : 0f;
 
-        }*/
-        /*public override void NPCLoot()
+        }
+        public override void NPCLoot()
         {
             if (Main.rand.Next(5) == 0)
                 Item.NewItem(npc.getRect(), ItemID.SoulofLight);
             if (Main.rand.Next(5) == 0)
                 Item.NewItem(npc.getRect(), ItemID.SoulofNight);
-        }*/
+        }
 
         public override void SendExtraAI(System.IO.BinaryWriter writer) {
             writer.Write(timer);
