@@ -32,7 +32,7 @@ namespace TenebraeMod.NPCs
             npc.aiStyle = -1;
             npc.width = 38;
             npc.height = 38;
-			npc.defense = 40;
+			npc.defense = 60;
 			npc.damage = 140;
 			npc.lifeMax = 10000;
             npc.knockBackResist = 0f;
@@ -91,7 +91,7 @@ namespace TenebraeMod.NPCs
             npc.aiStyle = -1;
             npc.width = 32;
             npc.height = 32;
-			npc.defense = 40;
+			npc.defense = 80;
 			npc.damage = 110;
 			npc.lifeMax = 6000;
             npc.knockBackResist = 0f;

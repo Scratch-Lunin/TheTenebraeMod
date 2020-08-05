@@ -16,7 +16,7 @@ namespace TenebraeMod.Items.Weapons
             item.ranged = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.damage = 60;
+            item.damage = 40;
             item.width = 14;
             item.height = 14;
             item.useTime = 15;
@@ -24,8 +24,8 @@ namespace TenebraeMod.Items.Weapons
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
-            item.value = 1;
-            item.rare = 0;
+            item.value = 6;
+            item.rare = 10;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("LuminiteSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

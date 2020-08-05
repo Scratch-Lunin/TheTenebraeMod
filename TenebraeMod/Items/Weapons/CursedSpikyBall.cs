@@ -25,8 +25,8 @@ namespace TenebraeMod.Items.Weapons
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
-            item.value = 1;
-            item.rare = 0;
+            item.value = 3;
+            item.rare = 4;
             item.shootSpeed = 12f;
             item.shoot = mod.ProjectileType("CursedSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

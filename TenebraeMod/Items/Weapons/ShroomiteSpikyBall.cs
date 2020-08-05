@@ -17,7 +17,7 @@ namespace TenebraeMod.Items.Weapons
             item.ranged = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.damage = 40;
+            item.damage = 15;
             item.width = 14;
             item.height = 14;
             item.useTime = 15;
@@ -25,8 +25,8 @@ namespace TenebraeMod.Items.Weapons
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
-            item.value = 1;
-            item.rare = 0;
+            item.value = 500;
+            item.rare = 8;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("ShroomiteSpikyBallProjectile");
             item.UseSound = SoundID.Item1;
@@ -38,7 +38,7 @@ namespace TenebraeMod.Items.Weapons
             recipe.AddIngredient(ItemID.SpikyBall,75);
             recipe.AddIngredient(ItemID.ShroomiteBar);
             recipe.AddTile(TileID.Autohammer);
-            recipe.SetResult(this,75);
+            recipe.SetResult(this,25);
             recipe.AddRecipe();
         }
     }
@@ -55,7 +55,8 @@ namespace TenebraeMod.Items.Weapons
 			projectile.width = 14;
 			projectile.height = 14;
 			projectile.penetrate = 1;
-			projectile.friendly = true;
+            projectile.maxPenetrate = 1;
+            projectile.friendly = true;
 			projectile.tileCollide = true;
 		}
 

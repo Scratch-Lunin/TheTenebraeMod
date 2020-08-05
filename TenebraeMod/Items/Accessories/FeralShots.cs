@@ -27,15 +27,21 @@ namespace TenebraeMod.Items.Accessories
             player.buffImmune[148] = true;
         }
 
-        public override void AddRecipes()
+        public class FeralShotsDrops : GlobalNPC
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(null, "BatFang", 3);
-            recipe.AddIngredient(892);
-            recipe.AddIngredient(548, 5);
-            recipe.AddTile(114);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            public override void NPCLoot(NPC npc)
+            {
+                if (npc.type == 93 || npc.type == 137 || npc.type == 151 || npc.type == 152 || npc.type == 158 || npc.type == 159)
+                {
+                    if (NPC.downedMechBoss3 == true || NPC.downedMechBoss2 == true || NPC.downedMechBoss1 == true)
+                    {
+                        if (Main.rand.Next(20) == 1)
+                        {
+                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("FeralShots"), 1);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TenebraeMod.Items.Weapons
 		public override void SetStaticDefaults() 
 		{
 			// DisplayName.SetDefault("g"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			Tooltip.SetDefault("Fires an array of meteors that split bounce on impact");
+			Tooltip.SetDefault("Fires an array of meteors that bounce on impact");
 		}
 
 		public override void SetDefaults() 
@@ -22,15 +22,15 @@ namespace TenebraeMod.Items.Weapons
 			item.melee = true;
 			item.width = 40;
 			item.height = 40;
-			item.useTime = 120;
-			item.useAnimation = 30;
+			item.useTime = 140;
+			item.useAnimation = 40;
 			item.useStyle = 1;
 			item.knockBack = 6;
 			item.value = 10000;
 			item.rare = 2;
 			item.UseSound = SoundID.Item1;
 			item.autoReuse = true;
-			item.shootSpeed = 10f;	
+			item.shootSpeed = 6f;	
 		item.shoot = mod.ProjectileType("MeteorRock");
 		}
 		
@@ -56,8 +56,8 @@ namespace TenebraeMod.Items.Weapons
 		public override void AddRecipes() 
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.DirtBlock, 10);
-			recipe.AddTile(TileID.WorkBenches);
+			recipe.AddIngredient(ItemID.MeteoriteBar, 15);
+			recipe.AddTile(TileID.Anvils);
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}

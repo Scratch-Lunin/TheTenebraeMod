@@ -26,7 +26,7 @@ namespace TenebraeMod.Items.Weapons
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
-            item.value = 1;
+            item.value = 2;
             item.rare = 0;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("FlamingSpikyBallProjectile");

@@ -41,9 +41,11 @@ namespace TenebraeMod.Items.Weapons
 		}
 	}
 
-    internal class EyeArrow : ModProjectile {
+    internal class EyeArrow : ModProjectile 
+	{
 		private NPC target;
-        public override void SetDefaults() {
+        public override void SetDefaults() 
+		{
 			projectile.ranged = true;
             projectile.arrow = true;
 			projectile.aiStyle = -1;

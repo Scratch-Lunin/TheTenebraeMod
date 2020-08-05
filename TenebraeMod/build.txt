@@ -1,4 +1,4 @@
 displayName = Tenebrae Mod
 author = Scratch Lunin, OrangeMonkey, and turingcomplete30
-version = 1.4.1
-homepage = discord.gg/KPsFQzG
+version = 1.5.0.1
+homepage = https://discord.com/invite/KPsFQzG

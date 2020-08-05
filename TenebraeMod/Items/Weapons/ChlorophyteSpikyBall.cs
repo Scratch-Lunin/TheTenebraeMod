@@ -24,8 +24,8 @@ namespace TenebraeMod.Items.Weapons
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
-            item.value = 1;
-            item.rare = 0;
+            item.value = 20;
+            item.rare = 7;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("ChlorophyteSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

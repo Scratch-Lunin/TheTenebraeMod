@@ -21,9 +21,9 @@ namespace TenebraeMod.NPCs
             npc.height = 34;
             npc.lifeMax = 1200;
             npc.damage = 80;
-            npc.defense = 20;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
+            npc.defense = 60;
+            npc.HitSound = SoundID.NPCHit4;
+            npc.DeathSound = SoundID.NPCDeath14;
             npc.value = 2500f;
             npc.knockBackResist = 0f;
             npc.aiStyle = 2;

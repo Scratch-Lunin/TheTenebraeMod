@@ -4,36 +4,46 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.DataStructures;
+using Microsoft.Xna.Framework;
 
 namespace TenebraeMod.Items.Weapons
 {
     public class NebulaVaporwave : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            // ticksperframe, frameCount
-            Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(4, 12));
-        }
 
         public override void SetDefaults()
         {
             item.width = 22;
             item.height = 42;
             item.value = 100000;
-            item.rare = 10;
-            item.damage = 120;
+            item.rare = ItemRarityID.Red;
+            item.damage = 75;
             item.magic = true;
             item.knockBack = 4f;
-            item.holdStyle = 3;
+            item.holdStyle = 0;
             item.useStyle = 4;
-            item.shoot = 634;
-            item.shootSpeed = 5f;
+            item.shootSpeed = 10f;
+            item.shoot = mod.ProjectileType("Vaporwave");
             item.noMelee = true;
-            item.mana = 15;
-            item.useTime = 40;
-            item.useAnimation = 40;
+            item.mana = 20;
+			item.useAnimation = 20;
+			item.useTime = 5;
+			item.UseSound = SoundID.Item34;
+			item.reuseDelay = 25;
             item.autoReuse = true;
         }
+public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		{
+			int numberProjectiles = 2 + Main.rand.Next(1);
+			for (int i = 0; i < numberProjectiles; i++)
+			{
+				Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(25)); 
+			
+				Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
+			}
+			return false;
+		}
+
 
         public override void AddRecipes()
         {
@@ -43,5 +53,5 @@ namespace TenebraeMod.Items.Weapons
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
-    }
+	}
 }

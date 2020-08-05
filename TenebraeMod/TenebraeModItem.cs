@@ -204,7 +204,7 @@ namespace TenebraeMod {
             recipe.AddRecipe();
 
             recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.Vine,3);
+            recipe.AddIngredient(ItemID.Vine,10);
             recipe.AddIngredient(ItemID.Leather,5);
             recipe.AddTile(TileID.Loom);
             recipe.SetResult(ItemID.FeralClaws);
@@ -226,23 +226,23 @@ namespace TenebraeMod {
             
             recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemID.OldShoe);
-            recipe.AddIngredient(ItemID.DayBloomPlanterBox,5);
+            recipe.AddIngredient(ItemID.DayBloomPlanterBox,25);
             recipe.AddIngredient(ItemID.JungleGrassSeeds,10);
             recipe.AddTile(TileID.Loom);
             recipe.SetResult(ItemID.FlowerBoots);
             recipe.AddRecipe();
 
             recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.PlatinumBar,3);
-            recipe.AddIngredient(ItemID.Cloud,20);
+            recipe.AddIngredient(ItemID.PlatinumBar,6);
+            recipe.AddIngredient(ItemID.Cloud,50);
             recipe.AddIngredient(ItemID.Feather,5);
             recipe.AddTile(TileID.SkyMill);
             recipe.SetResult(ItemID.LuckyHorseshoe);
             recipe.AddRecipe();
 
             recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.GoldBar,3);
-            recipe.AddIngredient(ItemID.Cloud,20);
+            recipe.AddIngredient(ItemID.GoldBar,6);
+            recipe.AddIngredient(ItemID.Cloud,50);
             recipe.AddIngredient(ItemID.Feather,5);
             recipe.AddTile(TileID.SkyMill);
             recipe.SetResult(ItemID.LuckyHorseshoe);
@@ -277,6 +277,30 @@ namespace TenebraeMod {
             recipe.AddIngredient(ItemID.Ectoplasm, 15);
             recipe.AddTile(TileID.Bookcases);
             recipe.SetResult(ItemID.MagnetSphere);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "WornCloth", 15);
+            recipe.AddIngredient(ItemID.SoulofNight, 6);
+            recipe.AddIngredient(ItemID.DarkShard, 2);
+            recipe.AddTile(TileID.MythrilAnvil);
+            recipe.SetResult(ItemID.Blindfold);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "WornCloth", 10);
+            recipe.AddIngredient(ItemID.SandBlock, 50);
+            recipe.AddIngredient(ItemID.Sandstone, 25);
+            recipe.AddTile(TileID.Loom);
+            recipe.SetResult(ItemID.FlyingCarpet);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "TatteredBand", 1);
+            recipe.AddIngredient(ItemID.LavaBucket, 3);
+            recipe.AddIngredient(ItemID.AshBlock, 25);
+            recipe.AddTile(TileID.Hellforge);
+            recipe.SetResult(ItemID.LavaCharm);
             recipe.AddRecipe();
         }
     }
