@@ -63,13 +63,7 @@ namespace TenebraeMod.Items.Weapons
 			projectile.penetrate = -1;
 			projectile.melee = true;
 		}
-		// notes for aiStyle 99: 
-		// localAI[0] is used for timing up to YoyosLifeTimeMultiplier
-		// localAI[1] can be used freely by specific types
-		// ai[0] and ai[1] usually point towards the x and y world coordinate hover point
-		// ai[0] is -1f once YoyosLifeTimeMultiplier is reached, when the player is stoned/frozen, when the yoyo is too far away, or the player is no longer clicking the shoot button.
-		// ai[0] being negative makes the yoyo move back towards the player
-		// Any AI method can be used for dust, spawning projectiles, etc specific to your yoyo.
+
 		public override void AI()
 		{
 			timer++;
@@ -109,17 +103,6 @@ namespace TenebraeMod.Items.Weapons
 				projectile.friendly = true;
 			}
 		}
-
-		/*
-        public override void PostAI()
-		{
-			if (Main.rand.NextBool())
-			{
-				Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, 16);
-				dust.noGravity = true;
-				dust.scale = 1.6f;
-			}
-		}*/
 	}
 
 	internal class SandParticles : ModProjectile
@@ -142,7 +125,6 @@ namespace TenebraeMod.Items.Weapons
 			{
 				Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, 10, (float)Main.rand.Next(-2, 2), (float)Main.rand.Next(-2, 2), 50);
 				dust.noGravity = false;
-				//dust.scale = 1.6f;
 			}
 			projectile.velocity.X *= .99f;
 			projectile.velocity.Y *= .98f;
