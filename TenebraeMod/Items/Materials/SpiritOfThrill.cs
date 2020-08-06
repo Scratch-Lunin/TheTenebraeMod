@@ -30,17 +30,16 @@ namespace TenebraeMod.Items.Materials
 
     public class SpiritOfThrillDrop : GlobalNPC
     {
-        private int number;
         public override void NPCLoot(NPC npc)
         {
             if (npc.type == NPCID.Pumpking)
             {
                 if (Main.invasionProgressWave > 11)
-                    number = Main.rand.Next(3, 6);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ItemType<SpiritOfThrill>(), Main.rand.Next(3, 6));
                 else
-                    number = Main.rand.Next(5, 11);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ItemType<SpiritOfThrill>(), Main.rand.Next(5, 11));
 
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ItemType<SpiritOfThrill>(), number);
+
             }
         }
     }
