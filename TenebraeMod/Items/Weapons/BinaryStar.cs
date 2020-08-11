@@ -19,7 +19,7 @@ namespace TenebraeMod.Items.Weapons
 		}
 
 		public override void SetDefaults() {
-			item.damage = 210;
+			item.damage = 160;
 			item.melee = true;
 			item.width = 60;
 			item.height = 40;
