@@ -36,11 +36,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gweik\\OneDrive\\Documents\\GitHub\\TenebraeMod\\TenebraeMod\\TenebraeMod.csproj",
+      "projectUniqueName": "C:\\Users\\gweik\\OneDrive\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\TenebraeMod\\TenebraeMod.csproj",
       "projectName": "TenebraeMod",
-      "projectPath": "C:\\Users\\gweik\\OneDrive\\Documents\\GitHub\\TenebraeMod\\TenebraeMod\\TenebraeMod.csproj",
+      "projectPath": "C:\\Users\\gweik\\OneDrive\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\TenebraeMod\\TenebraeMod.csproj",
       "packagesPath": "C:\\Users\\gweik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gweik\\OneDrive\\Documents\\GitHub\\TenebraeMod\\TenebraeMod\\obj\\",
+      "outputPath": "C:\\Users\\gweik\\OneDrive\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\TenebraeMod\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gweik\\AppData\\Roaming\\NuGet\\NuGet.Config",

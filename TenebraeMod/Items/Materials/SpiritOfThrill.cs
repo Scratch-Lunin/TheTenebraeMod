@@ -38,8 +38,6 @@ namespace TenebraeMod.Items.Materials
                     Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ItemType<SpiritOfThrill>(), Main.rand.Next(3, 6));
                 else
                     Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, ItemType<SpiritOfThrill>(), Main.rand.Next(5, 11));
-
-
             }
         }
     }

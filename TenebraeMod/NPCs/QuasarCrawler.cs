@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using System;
 using TenebraeMod.Projectiles;
+using TenebraeMod.Items.Banners;
 
 namespace TenebraeMod.NPCs
 {
@@ -48,6 +49,8 @@ namespace TenebraeMod.NPCs
             {
             	npc.buffImmune[i] = true;
             }
+			banner = npc.type;
+			bannerItem = ItemType<QuasarCrawlerBanner>();
 		}
 
 		public override void Init() {

@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Microsoft.Xna.Framework;
+using TenebraeMod.Items.Banners;
 
 namespace TenebraeMod.NPCs
 {
@@ -28,7 +29,8 @@ namespace TenebraeMod.NPCs
             npc.knockBackResist = 0f;
             npc.aiStyle = 2;
             aiType = NPCID.DemonEye;
-
+            banner = npc.type;
+            bannerItem = ItemType<NebulaicWatcherBanner>();
         }
 
         public override bool PreAI() {
