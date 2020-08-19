@@ -1,3 +1,0 @@
-displayName = Tenebrae Mod
-author = Scratch Lunin, OrangeMonkey, and turingcomplete30
-version = 1.4
