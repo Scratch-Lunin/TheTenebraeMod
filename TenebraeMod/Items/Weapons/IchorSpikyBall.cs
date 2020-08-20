@@ -14,7 +14,7 @@ namespace TenebraeMod.Items.Weapons
         }
 
         public override void SetDefaults() {
-            item.ranged = true;
+            item.throwing = true;
             item.maxStack = 999;
             item.consumable = true;
             item.damage = 20;
@@ -50,7 +50,7 @@ namespace TenebraeMod.Items.Weapons
 		}
 
 		public override void SetDefaults() {
-			projectile.ranged = true;
+			projectile.throwing = true;
 			projectile.aiStyle = -1;
 			projectile.width = 14;
 			projectile.height = 14;
@@ -113,7 +113,7 @@ namespace TenebraeMod.Items.Weapons
             for (int i=0; i<3; i++) {
                 Projectile shot = Main.projectile[Projectile.NewProjectile(projectile.Center,new Vector2(0,-4).RotatedByRandom(Math.PI/2),ProjectileID.GoldenShowerFriendly,projectile.damage,projectile.knockBack,projectile.owner)];
                 shot.magic = false;
-                shot.ranged = true;
+                shot.throwing = true;
             }
         }
     }
