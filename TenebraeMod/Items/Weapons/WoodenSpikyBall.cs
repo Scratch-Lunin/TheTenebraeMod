@@ -14,14 +14,14 @@ namespace TenebraeMod.Items.Weapons
         }
 
         public override void SetDefaults() {
-            item.throwing = true;
+            item.thrown = true;
             item.maxStack = 999;
             item.consumable = true;
             item.damage = 5;
             item.width = 14;
             item.height = 14;
-            item.useTime = 15;
-            item.useAnimation = 15;
+            item.useTime = 25;
+            item.useAnimation = 25;
             item.noUseGraphic = true;
             item.useStyle = 1;
             item.knockBack = 1;
@@ -49,7 +49,7 @@ namespace TenebraeMod.Items.Weapons
 		}
 
 		public override void SetDefaults() {
-			projectile.throwing = true;
+			projectile.thrown = true;
 			projectile.aiStyle = -1;
 			projectile.width = 14;
 			projectile.height = 14;
