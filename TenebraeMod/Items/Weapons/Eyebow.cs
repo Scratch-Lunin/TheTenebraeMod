@@ -18,18 +18,18 @@ namespace TenebraeMod.Items.Weapons
 		public override void SetDefaults() {
 			item.damage = 16;
 			item.ranged = true;
-			item.width = 22;
+			item.width = 24;
 			item.height = 36;
 			item.useTime = 25;
 			item.useAnimation = 25;
-			item.useStyle = 5;
+			item.useStyle = ItemUseStyleID.HoldingOut;
 			item.noMelee = true;
 			item.knockBack = 1;
 			item.value = 2000;
-			item.rare = 1;
+			item.rare = ItemRarityID.Blue;
 			item.UseSound = SoundID.Item5;
 			item.autoReuse = true;
-			item.shoot = 10;
+			item.shoot = ProjectileID.PurificationPowder;
 			item.shootSpeed = 7f;
 			item.useAmmo = AmmoID.Arrow;
 		}
@@ -96,7 +96,7 @@ namespace TenebraeMod.Items.Weapons
 			}
 		}
         public override bool OnTileCollide(Vector2 oldVelocity) {
-			Main.PlaySound(0, projectile.position);
+			Main.PlaySound(SoundID.Dig, projectile.position);
             Collision.HitTiles(projectile.position + projectile.velocity, projectile.velocity, projectile.width, projectile.height);
             return true;
         }

@@ -18,16 +18,16 @@ namespace TenebraeMod.Items.Weapons
 
 		public override void SetDefaults() 
 		{
-			item.damage = 125;
+			item.damage = 90;
 			item.melee = true;
 			item.width = 74;
 			item.height = 74;
 			item.useTime = 50;
 			item.useAnimation = 50;
-			item.useStyle = 1;
+			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.knockBack = 4;
 			item.value = 300000;
-			item.rare = 7;
+			item.rare = ItemRarityID.Lime;
 			item.UseSound = SoundID.Item1;
 			item.shootSpeed = 85f;	
 		item.shoot = mod.ProjectileType("SpectreHammerWave");
