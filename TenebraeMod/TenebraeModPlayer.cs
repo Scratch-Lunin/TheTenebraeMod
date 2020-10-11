@@ -27,5 +27,20 @@ namespace TenebraeMod {
         public override void OnHitPvpWithProj(Projectile proj, Player target, int damage, bool crit) {
             if (Main.rand.NextBool(7)) {target.AddBuff(BuffType<Berserked>(),7*60);}
         }
+
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+            if (player.HasBuff(mod.BuffType("HolyRetribution")) && (item.type == ItemID.Excalibur || item.type == ItemID.TrueExcalibur))
+                add += 0.2f;
+        }
+
+        public override float UseTimeMultiplier(Item item)
+        {
+            if (player.HasBuff(mod.BuffType("HolyRetribution")) && (item.type == ItemID.Excalibur || item.type == ItemID.TrueExcalibur))
+            {
+                return 1.2f;
+            }
+            return base.UseTimeMultiplier(item);
+        }
     }
 }
