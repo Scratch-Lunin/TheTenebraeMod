@@ -10,7 +10,7 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Mecharang");
-            Tooltip.SetDefault("'Now the rib shoots lasers? What kind of-'");
+            Tooltip.SetDefault("'Now the rib shoots lasers? This is peculiar indeed.'");
         }
 
         public override void SetDefaults() {
@@ -21,10 +21,10 @@ namespace TenebraeMod.Items.Weapons
             item.useTime = 25;
             item.useAnimation = 25;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 10;
             item.value = 75000;
-            item.rare = 5;
+            item.rare = ItemRarityID.Pink;
             item.shootSpeed = 14f;
             item.shoot = mod.ProjectileType ("MecharangProjectile");
             item.UseSound = SoundID.Item1;
@@ -48,7 +48,7 @@ namespace TenebraeMod.Items.Weapons
             recipe.AddIngredient(null, "Skelerang");
             recipe.AddIngredient(ItemID.HallowedBar, 12);
             recipe.AddIngredient(ItemID.SoulofFright, 20);
-			recipe.AddTile(134);
+			recipe.AddTile(TileID.MythrilAnvil);
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}
