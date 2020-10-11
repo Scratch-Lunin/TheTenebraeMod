@@ -15,10 +15,10 @@ namespace TenebraeMod.Items.Accessories
 
         public override void SetDefaults()
         {
-            item.width = 24;
-            item.height = 28;
+            item.width = 30;
+            item.height = 32;
             item.value = 10000;
-            item.rare = 4;
+            item.rare = ItemRarityID.LightRed;
             item.accessory = true;
         }
 
@@ -32,22 +32,11 @@ namespace TenebraeMod.Items.Accessories
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(3781);
-            recipe.AddIngredient(1921);
-            recipe.AddTile(114);
+            recipe.AddIngredient(ItemID.PocketMirror);
+            recipe.AddIngredient(ItemID.HandWarmer);
+            recipe.AddTile(TileID.TinkerersWorkbench);
             recipe.SetResult(this);
             recipe.AddRecipe();
-
-            ModRecipe recipe2 = new ModRecipe(mod);
-            recipe2.AddIngredient(901);
-            recipe2.AddIngredient(902);
-            recipe2.AddIngredient(903);
-            recipe2.AddIngredient(904);
-            recipe2.AddIngredient(888);
-            recipe2.AddIngredient(null, "ReflectiveGlove");
-            recipe2.AddTile(114);
-            recipe2.SetResult(1612);
-            recipe2.AddRecipe();
         }
     }
 
