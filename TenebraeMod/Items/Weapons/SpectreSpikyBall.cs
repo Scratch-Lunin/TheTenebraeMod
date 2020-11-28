@@ -10,6 +10,7 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Spectre Spiky Ball");
+            Tooltip.SetDefault("Can travel through walls and inflict lifesteal");
         }
 
         public override void SetDefaults() {
@@ -22,10 +23,10 @@ namespace TenebraeMod.Items.Weapons
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 100;
-            item.rare = 8;
+            item.rare = ItemRarityID.Yellow;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("SpectreSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

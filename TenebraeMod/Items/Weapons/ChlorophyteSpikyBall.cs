@@ -10,6 +10,7 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Chlorophyte Spiky Ball");
+            Tooltip.SetDefault("Sticks to enemies");
         }
 
         public override void SetDefaults() {
@@ -22,10 +23,10 @@ namespace TenebraeMod.Items.Weapons
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 20;
-            item.rare = 7;
+            item.rare = ItemRarityID.Lime;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("ChlorophyteSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

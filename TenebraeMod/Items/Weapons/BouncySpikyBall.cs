@@ -22,10 +22,10 @@ namespace TenebraeMod.Items.Weapons
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 10;
-            item.rare = 0;
+            item.rare = ItemRarityID.White;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("BouncySpikyBallProjectile");
             item.UseSound = SoundID.Item1;

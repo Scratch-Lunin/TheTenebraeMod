@@ -20,13 +20,13 @@ namespace TenebraeMod.Items.Weapons
             item.damage = 5;
             item.width = 14;
             item.height = 14;
-            item.useTime = 25;
-            item.useAnimation = 25;
+            item.useTime = 15;
+            item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 1;
-            item.rare = 0;
+            item.rare = ItemRarityID.White;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("WoodenSpikyBallProjectile");
             item.UseSound = SoundID.Item1;

@@ -11,22 +11,23 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Ichor Spiky Ball");
+            Tooltip.SetDefault("Sprays streams of ichor on hit");
         }
 
         public override void SetDefaults() {
             item.thrown = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.damage = 20;
+            item.damage = 15;
             item.width = 14;
             item.height = 14;
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 3;
-            item.rare = 4;
+            item.rare = ItemRarityID.LightRed;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("IchorSpikyBallProjectile");
             item.UseSound = SoundID.Item1;
@@ -35,10 +36,10 @@ namespace TenebraeMod.Items.Weapons
 
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemType<WoodenSpikyBall>(),75);
+            recipe.AddIngredient(ItemType<WoodenSpikyBall>(),25);
             recipe.AddIngredient(ItemID.Ichor);
             recipe.AddTile(TileID.MythrilAnvil);
-            recipe.SetResult(this,75);
+            recipe.SetResult(this,25);
             recipe.AddRecipe();
         }
     }

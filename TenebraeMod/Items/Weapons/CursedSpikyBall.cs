@@ -11,22 +11,23 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Cursed Spiky Ball");
+            Tooltip.SetDefault("Leaves a trail of cursed flames");
         }
 
         public override void SetDefaults() {
             item.thrown = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.damage = 25;
+            item.damage = 15;
             item.width = 14;
             item.height = 14;
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 3;
-            item.rare = 4;
+            item.rare = ItemRarityID.LightRed;
             item.shootSpeed = 12f;
             item.shoot = mod.ProjectileType("CursedSpikyBallProjectile");
             item.UseSound = SoundID.Item1;
@@ -35,10 +36,10 @@ namespace TenebraeMod.Items.Weapons
 
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemType<WoodenSpikyBall>(),75);
+            recipe.AddIngredient(ItemType<WoodenSpikyBall>(),25);
             recipe.AddIngredient(ItemID.CursedFlame);
             recipe.AddTile(TileID.MythrilAnvil);
-            recipe.SetResult(this,75);
+            recipe.SetResult(this,25);
             recipe.AddRecipe();
         }
     }

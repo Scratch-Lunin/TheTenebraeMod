@@ -10,22 +10,23 @@ namespace TenebraeMod.Items.Weapons
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Luminite Spiky Ball");
+            Tooltip.SetDefault("Homes and electrifies on hit");
         }
 
         public override void SetDefaults() {
             item.thrown = true;
             item.maxStack = 999;
             item.consumable = true;
-            item.damage = 40;
+            item.damage = 30;
             item.width = 14;
             item.height = 14;
             item.useTime = 15;
             item.useAnimation = 15;
             item.noUseGraphic = true;
-            item.useStyle = 1;
+            item.useStyle = ItemUseStyleID.SwingThrow;
             item.knockBack = 1;
             item.value = 6;
-            item.rare = 10;
+            item.rare = ItemRarityID.Red;
             item.shootSpeed = 5f;
             item.shoot = mod.ProjectileType("LuminiteSpikyBallProjectile");
             item.UseSound = SoundID.Item1;
