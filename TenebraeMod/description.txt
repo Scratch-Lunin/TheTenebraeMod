@@ -5,7 +5,7 @@ This mod is currently W.I.P.
 This mod was created by Scratch Lunin (me).
 
 -Developers-
-Programmers: OrangeMonkey, pro swag master 69
+Programmers: OrangeMonkey, pro swag master 69, Valmayu
 Spriters: Scratch Lunin, Blipp, pro swag master 69
 Musicians: A44
 
@@ -19,16 +19,16 @@ v1.5 Changelog
 -Added the Slimy Slicer, a drop from King Slime
 -Added rarities and sell values for the new spiky balls
 -Changed the hit and death sounds of the Nebulaic Watcher
--Changed the tooltips and functions of the Clinger’s Eye and the Divine Polish
+-Changed the tooltips and functions of the Clingerï¿½s Eye and the Divine Polish
 -Added Worn Cloth, a new material
 -Added recipes for the following items:
 Blindfold, Flying Carpet, Lava Charm
 -Changed the recipes for the following items:
 -Feral Claws, Lucky Horseshoe, Flower Boots
 -Removed the Bat Fang, and making the Feral Shots drop from its enemies instead
--Changed the Paper’s sprite
+-Changed the Paperï¿½s sprite
 
 v1.5.0.1 Changelog
 -Fixed the v1.5 update because I am bad at updating this mod
--Nerfed the Luminite and Shroomite Spiky Balls’ damage
+-Nerfed the Luminite and Shroomite Spiky Ballsï¿½ damage
 -Buffed the defense of the Nebulaic Watcher and Quasared Crawler
