@@ -16,7 +16,7 @@ namespace TenebraeMod.Items.Weapons
         public override void SetDefaults() {
             item.melee = true;
             item.damage = 55;
-            item.width = 22;
+            item.width = 28;
             item.height = 36;
             item.useTime = 25;
             item.useAnimation = 25;
