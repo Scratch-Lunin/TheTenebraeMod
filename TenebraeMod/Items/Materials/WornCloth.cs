@@ -10,10 +10,10 @@ namespace TenebraeMod.Items.Materials
     {
         public override void SetDefaults()
         {
-            item.width = 26;
-            item.height = 28;
+            item.width = 30;
+            item.height = 22;
             item.value = 3;
-            item.rare = 0;
+            item.rare = ItemRarityID.White;
             item.maxStack = 999;
         }
 
