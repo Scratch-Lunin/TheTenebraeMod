@@ -1,9 +1,10 @@
-﻿using Terraria;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using TenebraeMod.Items.Banners;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
-using Microsoft.Xna.Framework;
-using TenebraeMod.Items.Banners;
 
 namespace TenebraeMod.NPCs
 {
@@ -33,15 +34,19 @@ namespace TenebraeMod.NPCs
             bannerItem = ItemType<NebulaicWatcherBanner>();
         }
 
-        public override bool PreAI() {
-            npc.rotation = (Main.player[npc.target].Center-npc.Center).ToRotation()+MathHelper.Pi/2;
+        public override bool PreAI()
+        {
+            npc.rotation = (Main.player[npc.target].Center - npc.Center).ToRotation() + MathHelper.Pi / 2;
             timer++;
-            if (timer == 240) {
+            if (timer == 240)
+            {
                 timer = 0;
-            } else if (timer % 60 == 0) {
-                Projectile.NewProjectile(npc.Center,12*(Main.player[npc.target].Center-npc.Center)/(Main.player[npc.target].Center-npc.Center).Length(),ProjectileID.NebulaLaser,80,6,Main.myPlayer);
             }
-            
+            else if (timer % 60 == 0)
+            {
+                Projectile.NewProjectile(npc.Center, 12 * (Main.player[npc.target].Center - npc.Center) / (Main.player[npc.target].Center - npc.Center).Length(), ProjectileID.NebulaLaser, 80, 6, Main.myPlayer);
+            }
+
             return true;
         }
 
@@ -63,14 +68,35 @@ namespace TenebraeMod.NPCs
                 Item.NewItem(npc.getRect(), ItemID.SoulofNight);
         }
 
-        public override void SendExtraAI(System.IO.BinaryWriter writer) {
+        public override void SendExtraAI(System.IO.BinaryWriter writer)
+        {
             writer.Write(timer);
         }
 
-        public override void ReceiveExtraAI(System.IO.BinaryReader reader) {
+        public override void ReceiveExtraAI(System.IO.BinaryReader reader)
+        {
             timer = reader.ReadInt32();
+        }
+
+        public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
+        {
+            Texture2D texture = mod.GetTexture("NPCs/NebulaicWatcher_glowmask");
+            spriteBatch.Draw
+            (
+                texture,
+                new Vector2
+                (
+                    npc.position.X - Main.screenPosition.X + npc.width * 0.5f,
+                    npc.position.Y - Main.screenPosition.Y + npc.height - texture.Height * 0.5f + 2f
+                ),
+                new Rectangle(0, 0, texture.Width, texture.Height),
+                Color.White,
+                npc.rotation,
+                texture.Size() * 0.5f,
+                npc.scale,
+                SpriteEffects.None,
+                0f);
         }
     }
 }
 
-   

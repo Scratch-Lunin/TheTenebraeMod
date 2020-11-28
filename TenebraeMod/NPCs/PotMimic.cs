@@ -13,7 +13,7 @@ namespace TenebraeMod.NPCs
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Pot Mimic");
-			Main.npcFrameCount[npc.type] = 7;
+			Main.npcFrameCount[npc.type] = 18;
 		}
 
 		public override void SetDefaults()
