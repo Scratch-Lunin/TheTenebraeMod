@@ -19,18 +19,18 @@ namespace TenebraeMod.Items.Weapons
 		}
 
 		public override void SetDefaults() {
-			item.damage = 160;
+			item.damage = 90;
 			item.melee = true;
 			item.width = 60;
 			item.height = 40;
 			item.useTime = 40;
 			item.useAnimation = 40;
-			item.useStyle = 5;
+			item.useStyle = ItemUseStyleID.HoldingOut;
 			item.noMelee = true;
             item.noUseGraphic = true;
 			item.knockBack = 6.5f;
 			item.value = 100000;
-			item.rare = 10;
+			item.rare = ItemRarityID.Red;
 			item.UseSound = SoundID.Item1;
 			item.shoot = ProjectileType<BinaryStarProjectile>();
 			item.shootSpeed = 15.9f;
