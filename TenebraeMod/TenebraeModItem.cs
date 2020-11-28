@@ -297,6 +297,12 @@ namespace TenebraeMod {
             recipe.SetResult(ItemID.AnkhCharm);
             recipe.AddRecipe();
 
+            recipe = new ModRecipe(mod);
+            recipe.AddIngredient(null, "MoldyHerosTome");
+            recipe.AddTile(TileID.DemonAltar);
+            recipe.SetResult(ItemID.BrokenHeroSword);
+            recipe.AddRecipe();
+
 
             finder = new RecipeFinder();
             finder.AddIngredient(ItemID.Blindfold);
