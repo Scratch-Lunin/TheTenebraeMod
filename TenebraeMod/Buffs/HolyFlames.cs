@@ -8,8 +8,6 @@ namespace TenebraeMod.Buffs
 {
 	public class HolyFlames : ModBuff
 	{
-        float timepassed;
-
 		public override void SetDefaults() {
 			DisplayName.SetDefault("Holy Flames");
 			Description.SetDefault("The longer you have it, the more it burns");
@@ -17,7 +15,6 @@ namespace TenebraeMod.Buffs
 			Main.pvpBuff[Type] = true;
 			Main.buffNoSave[Type] = true;
 			longerExpertDebuff = true;
-			timepassed = 0f;
 		}
 
 		public override void Update(Player player, ref int buffIndex) {
