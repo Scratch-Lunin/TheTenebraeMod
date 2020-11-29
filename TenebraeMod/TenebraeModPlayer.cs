@@ -20,7 +20,7 @@ namespace TenebraeMod {
 	public class TenebraeModPlayer : ModPlayer {
         public bool fleshGauntlet;
         public bool holyflames;
-        int timepassed = 0;
+        int holydamage = 0;
 
         public override void ResetEffects() {
 			holyflames = false;
@@ -63,18 +63,18 @@ namespace TenebraeMod {
 
         public override void UpdateBadLifeRegen() {
 			if (holyflames) {
-				if (timepassed > 480) { 
-					timepassed = 480; // Line 30 divides this by 16 and the game will divide that by 2.
+				if (holydamage > 480) { 
+					holydamage = 480; // Line 30 divides this by 16 and the game will divide that by 2.
 				}
             	if (player.lifeRegen > 0) {
 					player.lifeRegen = 0;
 				}
                 player.lifeRegenTime = 0;
-				player.lifeRegen -= (int)Math.Ceiling((float)timepassed / 16);
-				timepassed++;
+				player.lifeRegen -= (int)Math.Ceiling((float)holydamage / 16);
+				holydamage++;
 			}
 			else {
-				timepassed = 0;
+				holydamage = 0;
 			}
 		}
 
