@@ -29,7 +29,7 @@ namespace TenebraeMod.Projectiles
 		public override void AI() {
 			AdaptedAIStyle();
 			projectile.velocity = projectile.velocity.RotatedBy(MathHelper.ToRadians(rotation));
-			rotation *= 1.055f;
+			rotation *= 1.052f;
 		}
 
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit) { // TODO: Add OnHitPlayer method for PVP?
