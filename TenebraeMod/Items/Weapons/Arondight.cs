@@ -11,6 +11,7 @@ namespace TenebraeMod.Items.Weapons {
 
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("Arondight");
+			Tooltip.SetDefault("Spews holy flaming tentacles to burn your foes");
 		}
 
 		public override void SetDefaults() {
@@ -29,7 +30,7 @@ namespace TenebraeMod.Items.Weapons {
 			item.magic = true;
 			item.noMelee = true;
 			item.shoot = ModContent.ProjectileType<Holyflame>();
-			item.shootSpeed = 11f;
+			item.shootSpeed = 12f;
 		}
 
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
