@@ -13,7 +13,7 @@ namespace TenebraeMod.NPCs
 		public override bool InstancePerEntity => true;
 
 		public bool holyflames = false;
-		int timepassed = 0;
+		int holydamage = 0;
 
 		public override void ResetEffects(NPC npc) {
 			holyflames = false;
@@ -21,17 +21,20 @@ namespace TenebraeMod.NPCs
 
 		public override void UpdateLifeRegen(NPC npc, ref int damage) {
 			if (holyflames) {
-				if (timepassed > 960) { 
-					timepassed = 960; // Line 30 divides this by 16 and the game will divide that by 2.
+				if (holydamage > npc.lifeMax / 2 && !npc.boss) {
+					holydamage = holydamage > 1920 ? 960 : npc.lifeMax / 2;  // Line 30 divides this by 16 and the game will divide that by 2.
+				}
+				else if (holydamage > 480 && npc.boss) {
+					holydamage = 480;
 				}
             	if (npc.lifeRegen > 0) {
 					npc.lifeRegen = 0;
 				}
-				npc.lifeRegen -= (int)Math.Ceiling((float)timepassed / 16);
-				timepassed++;
+				npc.lifeRegen -= (int)Math.Ceiling((float)holydamage / 16);
+				holydamage++;
 			}
 			else {
-				timepassed = 0;
+				holydamage = 0;
 			}
 		}
 
