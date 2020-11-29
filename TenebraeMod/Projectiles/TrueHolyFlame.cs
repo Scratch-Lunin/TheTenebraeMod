@@ -9,6 +9,8 @@ namespace TenebraeMod.Projectiles
 	public class TrueHolyFlame : ModProjectile
 	{
 		float rotation;
+		int sharpness = 3; // How sharp the dust spawn curve is
+		float maxvalue = 6f; // The highest value dustcount can reach
 
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("True Holy Flame");
@@ -24,6 +26,7 @@ namespace TenebraeMod.Projectiles
 			projectile.MaxUpdates = 5;
 			projectile.penetrate = -1;
 			rotation = Main.rand.NextFloat(-0.8f, 0.8f);
+			maxvalue = (maxvalue - 0.5f) / (float)Math.Pow(10, sharpness);
 		}
 
 		public override void AI() {
@@ -68,7 +71,9 @@ namespace TenebraeMod.Projectiles
 			if (projectile.scale < 1f)
 			{
 				int dustType = rotation > 0 ? mod.DustType("HolyflameDust") : mod.DustType("PinkHolyflameDust");
-				for (int num779 = 0; (float)num779 < projectile.scale * 10f; num779++) // TODO: Reduce dust spawned after a certain amount is on screen. Game usually hits dust limit while fighting a boss, preventing most of the dust to spawn
+				float dustcount = (maxvalue / (float)Math.Pow((Main.gfxQuality * 10), -sharpness)) + 0.5f; // One self-taught maths lesson later...
+				Main.chatText = dustcount.ToString();
+				for (int num779 = 0; (float)num779 < projectile.scale * dustcount; num779++)
 				{
 					int num780 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, dustType, projectile.velocity.X, projectile.velocity.Y, 100, default(Color), 1.1f);
 					Main.dust[num780].position = (Main.dust[num780].position + projectile.Center) / 2f;
