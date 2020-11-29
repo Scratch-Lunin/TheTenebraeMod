@@ -72,7 +72,6 @@ namespace TenebraeMod.Projectiles
 			{
 				int dustType = rotation > 0 ? mod.DustType("HolyflameDust") : mod.DustType("PinkHolyflameDust");
 				float dustcount = (maxvalue / (float)Math.Pow((Main.gfxQuality * 10), -sharpness)) + 0.5f; // One self-taught maths lesson later...
-				Main.chatText = dustcount.ToString();
 				for (int num779 = 0; (float)num779 < projectile.scale * dustcount; num779++)
 				{
 					int num780 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, dustType, projectile.velocity.X, projectile.velocity.Y, 100, default(Color), 1.1f);
