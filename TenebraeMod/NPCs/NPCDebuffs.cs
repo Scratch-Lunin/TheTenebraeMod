@@ -39,14 +39,22 @@ namespace TenebraeMod.NPCs
 			}
 		}
 
-		public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        	public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
 		{
 			lastHitFromTrueHolyflame = projectile.type == ModContent.ProjectileType<Projectiles.TrueHolyFlame>();
 		}
 
-		public override void OnHitByItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+        	public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
 		{
 			lastHitFromTrueHolyflame = false;
+		}
+
+        	public override void NPCLoot(NPC npc)
+        	{
+			if (lastHitFromTrueHolyflame && npc.lifeMax > 5 && !npc.SpawnedFromStatue && !npc.friendly)
+			{
+				Item.NewItem(npc.Hitbox, ModContent.ItemType<Items.ArondightHealOrb>());
+            		}
 		}
 
 		public override void DrawEffects(NPC npc, ref Color drawColor) {
