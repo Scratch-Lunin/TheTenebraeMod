@@ -13,6 +13,7 @@ namespace TenebraeMod.NPCs
 		public override bool InstancePerEntity => true;
 
 		public bool holyflames = false;
+		public bool lastHitFromTrueHolyflame = false;
 		int holydamage = 0;
 
 		public override void ResetEffects(NPC npc) {
@@ -36,6 +37,16 @@ namespace TenebraeMod.NPCs
 			else {
 				holydamage = 0;
 			}
+		}
+
+		public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+		{
+			lastHitFromTrueHolyflame = projectile.type == ModContent.ProjectileType<Projectiles.TrueHolyFlame>();
+		}
+
+		public override void OnHitByItem(NPC npc, Player player, Item item, int damage, float knockback, bool crit)
+		{
+			lastHitFromTrueHolyflame = false;
 		}
 
 		public override void DrawEffects(NPC npc, ref Color drawColor) {
