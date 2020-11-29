@@ -68,7 +68,7 @@ namespace TenebraeMod.Projectiles
 			if (projectile.scale < 1f)
 			{
 				int dustType = rotation > 0 ? mod.DustType("HolyflameDust") : mod.DustType("PinkHolyflameDust");
-				for (int num779 = 0; (float)num779 < projectile.scale * 10f; num779++)
+				for (int num779 = 0; (float)num779 < projectile.scale * 10f; num779++) // TODO: Reduce dust spawned after a certain amount is on screen. Game usually hits dust limit while fighting a boss, preventing most of the dust to spawn
 				{
 					int num780 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, dustType, projectile.velocity.X, projectile.velocity.Y, 100, default(Color), 1.1f);
 					Main.dust[num780].position = (Main.dust[num780].position + projectile.Center) / 2f;
