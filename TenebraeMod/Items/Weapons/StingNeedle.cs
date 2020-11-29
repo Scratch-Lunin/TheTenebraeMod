@@ -17,8 +17,8 @@ namespace TenebraeMod.Items.Weapons {
 
 		public override void SetDefaults() {
 			item.damage = 13;
-			item.width = 36;
 			item.width = 34;
+			item.height = 32;
 			item.useTime = 5;
 			item.useAnimation = maxprojectiles * 5; // Projectiles will fire the same rate as useTime during the duration of the useAnimation
 			item.reuseDelay = maxprojectiles * 5;
