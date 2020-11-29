@@ -63,8 +63,8 @@ namespace TenebraeMod {
 
         public override void UpdateBadLifeRegen() {
 			if (holyflames) {
-				if (holydamage > 480) { 
-					holydamage = 480; // Line 30 divides this by 16 and the game will divide that by 2.
+				if (holydamage >= player.statLifeMax2) { 
+					holydamage = player.statLifeMax2; // Line 30 divides this by 16 and the game will divide that by 2.
 				}
             	if (player.lifeRegen > 0) {
 					player.lifeRegen = 0;
