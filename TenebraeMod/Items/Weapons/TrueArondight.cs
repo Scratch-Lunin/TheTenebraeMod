@@ -6,8 +6,8 @@ using Terraria.ModLoader;
 
 namespace TenebraeMod.Items.Weapons {
 	public class TrueArondight : ModItem { // TODO: Balance weapon
-		int staticusetime = 10;
-		int maxprojectiles = 3;
+		int staticusetime = 15;
+		int maxprojectiles = 2;
 
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("True Arondight");
