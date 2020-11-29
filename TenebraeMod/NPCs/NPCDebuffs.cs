@@ -22,11 +22,11 @@ namespace TenebraeMod.NPCs
 
 		public override void UpdateLifeRegen(NPC npc, ref int damage) {
 			if (holyflames) {
-				if (holydamage > npc.lifeMax / 2 && !npc.boss) {
-					holydamage = holydamage > 1920 ? 960 : npc.lifeMax / 2;  // Line 30 divides this by 16 and the game will divide that by 2.
+				if (holydamage >= npc.lifeMax / 2 && npc.lifeMax != 1920 && !npc.boss) {
+					holydamage = npc.lifeMax / 2;
 				}
-				else if (holydamage > 480 && npc.boss) {
-					holydamage = 480;
+				else if (holydamage >= 960) {
+					holydamage = 960;
 				}
             	if (npc.lifeRegen > 0) {
 					npc.lifeRegen = 0;
