@@ -357,18 +357,6 @@ namespace TenebraeMod {
                 item.useAnimation = 20;
                 item.useTime = 20;
             }
-
-            if (item.type == ItemID.TerraBlade)
-            {
-                item.useTime = 13;
-                item.useTime = 13;
-            }
-
-            if (item.type == ItemID.HoneyBalloon)
-            {
-                item.width = 22;
-                item.height = 28;
-            }
         }
 
         public override void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
@@ -381,15 +369,6 @@ namespace TenebraeMod {
             if (item.type == ItemID.TrueNightsEdge)
             {
                 target.AddBuff(BuffID.ShadowFlame, 240);
-            }
-
-            if (item.type == ItemID.TerraBlade)
-            {
-                target.AddBuff(BuffID.ShadowFlame, 480);
-                target.AddBuff(BuffID.OnFire, 480);
-                target.AddBuff(BuffID.Frostburn, 480);
-                target.AddBuff(BuffID.CursedInferno, 480);
-                target.AddBuff(BuffID.Ichor, 60);
             }
 
             if (player.HeldItem.type == ItemID.Excalibur && crit || player.HeldItem.type == ItemID.TrueExcalibur && crit)

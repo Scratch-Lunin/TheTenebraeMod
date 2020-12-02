@@ -16,14 +16,6 @@ namespace TenebraeMod
                 target.AddBuff(BuffID.CursedInferno, 240);
 
             }
-
-            if (projectile.type == ProjectileID.TerraBeam)
-            {
-                target.AddBuff(BuffID.ShadowFlame, 60);
-                target.AddBuff(BuffID.OnFire, 60);
-                target.AddBuff(BuffID.Frostburn, 60);
-                target.AddBuff(BuffID.CursedInferno, 60);
-            }
         }
     }
 }
