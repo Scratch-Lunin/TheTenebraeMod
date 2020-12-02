@@ -16,8 +16,8 @@ namespace TenebraeMod.Items.Weapons {
 
 		public override void SetDefaults() {
 			item.damage = 66;
-			item.width = 28;
-			item.width = 30;
+			item.width = 32;
+			item.width = 34;
 			item.useTime = staticusetime;
 			item.useAnimation = staticusetime * maxprojectiles;
 			item.useStyle = ItemUseStyleID.HoldingOut;
