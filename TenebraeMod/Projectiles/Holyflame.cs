@@ -26,7 +26,6 @@ namespace TenebraeMod.Projectiles
 			projectile.MaxUpdates = 3;
 			projectile.penetrate = -1;
 			rotation = Main.rand.NextFloat(-0.8f, 0.8f);
-			maxvalue = (maxvalue - 1) / (float)Math.Pow(10, sharpness);
 		}
 
 		public override void AI() {
@@ -70,7 +69,7 @@ namespace TenebraeMod.Projectiles
 			projectile.ai[1] *= 1.05f;
 			if (projectile.scale < 1f)
 			{
-				float dustcount = (maxvalue / (float)Math.Pow((Main.gfxQuality * 10), -sharpness)) + 1; // One self-taught maths lesson later...
+				float dustcount = ((float)Math.Pow(Main.gfxQuality, sharpness) * maxvalue) + 1; // One self-taught maths lesson later...
 				for (int num779 = 0; (float)num779 < projectile.scale * dustcount; num779++)
 				{
 					int num780 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, mod.DustType("HolyflameDust"), projectile.velocity.X, projectile.velocity.Y, 100, default(Color), 1.1f);
