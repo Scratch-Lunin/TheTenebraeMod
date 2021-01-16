@@ -34,7 +34,7 @@ namespace TenebraeMod.Projectiles
 		}
 		
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("Gamma Beam");
+			DisplayName.SetDefault("Quasar Beam");
 		}
 
 		public override void SetDefaults() {
