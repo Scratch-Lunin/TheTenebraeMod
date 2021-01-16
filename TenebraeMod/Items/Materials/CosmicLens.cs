@@ -8,13 +8,18 @@ using static Terraria.ModLoader.ModContent;
 namespace TenebraeMod.Items.Materials
 {
     public class CosmicLens : ModItem
-    { 
+    {
+        public override void SetStaticDefaults()
+        {
+            Tooltip.SetDefault("'Cloudy yet shiny'");
+        }
+
         public override void SetDefaults()
         {
-            item.width = 16;
-            item.height = 22;
+            item.width = 12;
+            item.height = 18;
             item.value = 3000;
-            item.rare = 9;
+            item.rare = 12;
             item.maxStack = 99;
         }
     }
