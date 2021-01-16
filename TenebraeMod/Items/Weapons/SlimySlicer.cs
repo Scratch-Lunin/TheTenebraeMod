@@ -19,14 +19,14 @@ namespace TenebraeMod.Items.Weapons
 		{
 			item.damage = 8;
 			item.melee = true;
-			item.width = 36;
+			item.width = 40;
 			item.height = 42;
 			item.useTime = 60;
 			item.useAnimation = 15;
-			item.useStyle = 1;
+			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.knockBack = 2;
 			item.value = 5000;
-			item.rare = 2;
+			item.rare = ItemRarityID.Green;
 			item.UseSound = SoundID.Item1;
 			item.autoReuse = true;
 			item.shootSpeed = 3f;
