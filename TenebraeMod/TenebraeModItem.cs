@@ -6,6 +6,7 @@ using Terraria.Graphics.Shaders;
 using static Terraria.ModLoader.ModContent;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace TenebraeMod {
     public class TenebraeModItem : GlobalItem
@@ -322,6 +323,19 @@ namespace TenebraeMod {
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            switch (item.rare)
+            {
+                case 12:
+                    foreach (TooltipLine line in tooltips)
+                    {
+                        if (line.mod == "Terraria" && line.Name == "ItemName")
+                        {
+                            line.overrideColor = new Color(70, 48, 167);
+                        }
+                    }
+                    break;
+            }
+
             if (item.type == ItemID.Excalibur)
             {
                 TooltipLine tip = new TooltipLine(mod, "Placeable", "Critical hits buff the Exalibur's abilities");
