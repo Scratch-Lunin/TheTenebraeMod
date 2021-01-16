@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
+using System;
 
 namespace TenebraeMod.NPCs
 {
@@ -14,24 +15,36 @@ namespace TenebraeMod.NPCs
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Nebulaic Watcher​");
+            // DisplayName.SetDefault("Flutter Slime"); // Automatic from .lang files
+			Main.npcFrameCount[npc.type] = 3; // make sure to set this for your modnpcs.
         }
 
         public override void SetDefaults()
         {
             npc.width = 34;
-            npc.height = 34;
-            npc.lifeMax = 1200;
-            npc.damage = 80;
-            npc.defense = 60;
+            npc.height = 58;
+            npc.lifeMax = 1500;
+            npc.damage = 120;
+            npc.defense = 40;
             npc.HitSound = SoundID.NPCHit4;
             npc.DeathSound = SoundID.NPCDeath14;
             npc.value = 2500f;
-            npc.knockBackResist = 0f;
+            npc.knockBackResist = 0.5f;
             npc.aiStyle = 2;
             aiType = NPCID.DemonEye;
             banner = npc.type;
             bannerItem = ItemType<NebulaicWatcherBanner>();
+            npc.buffImmune[BuffID.Bleeding] = true;
+            npc.buffImmune[BuffID.Confused] = true;
+            npc.buffImmune[BuffID.CursedInferno] = true;
+            npc.buffImmune[BuffID.OnFire] = true;
+            npc.buffImmune[BuffID.ShadowFlame] = true;
+            npc.buffImmune[BuffID.Frostburn] = true;
+            npc.buffImmune[BuffID.Ichor] = true;
+            npc.buffImmune[BuffID.Oiled] = true;
+            npc.buffImmune[BuffID.Poisoned] = true;
+            npc.buffImmune[BuffID.Venom] = true;
+            npc.buffImmune[BuffID.Wet] = true;
         }
 
         public override bool PreAI()
@@ -53,11 +66,23 @@ namespace TenebraeMod.NPCs
         public override void FindFrame(int frameHeight)
         {
             npc.spriteDirection = npc.direction;
+            npc.frameCounter++;
+            if (npc.frameCounter >= 8)
+            {
+                npc.frame.Y += frameHeight;
+                npc.frameCounter = 0;
+                if (npc.frame.Y >= Main.npcFrameCount[npc.type] * frameHeight)
+                {
+                npc.frame.Y = 0;
+                }
+            }
         }
+
+
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return (spawnInfo.player.ZoneSkyHeight && !Main.dayTime && NPC.downedMoonlord) ? (0.25f) : 0f;
+            return (spawnInfo.player.ZoneSkyHeight && NPC.downedMoonlord) ? (0.25f) : 0f;
 
         }
         public override void NPCLoot()
@@ -80,22 +105,9 @@ namespace TenebraeMod.NPCs
 
         public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
         {
-            Texture2D texture = mod.GetTexture("NPCs/NebulaicWatcher_glowmask");
-            spriteBatch.Draw
-            (
-                texture,
-                new Vector2
-                (
-                    npc.position.X - Main.screenPosition.X + npc.width * 0.5f,
-                    npc.position.Y - Main.screenPosition.Y + npc.height - texture.Height * 0.5f + 2f
-                ),
-                new Rectangle(0, 0, texture.Width, texture.Height),
-                Color.White,
-                npc.rotation,
-                texture.Size() * 0.5f,
-                npc.scale,
-                SpriteEffects.None,
-                0f);
+            var GlowMask = mod.GetTexture("NPCs/NebulaicWatcher_glowmask");
+            var Effects = npc.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            spriteBatch.Draw(GlowMask, npc.Center - Main.screenPosition + new Vector2(0, npc.gfxOffY), npc.frame, Color.White, npc.rotation, npc.frame.Size() / 2, npc.scale, Effects, 0);
         }
     }
 }

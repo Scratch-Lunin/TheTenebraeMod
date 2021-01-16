@@ -31,11 +31,11 @@ namespace TenebraeMod.NPCs
 
 		public override void SetDefaults() {
             npc.aiStyle = -1;
-            npc.width = 38;
-            npc.height = 38;
-			npc.defense = 60;
-			npc.damage = 140;
-			npc.lifeMax = 10000;
+            npc.width = 46;
+            npc.height = 42;
+			npc.defense = 40;
+			npc.damage = 250;
+			npc.lifeMax = 8000;
             npc.knockBackResist = 0f;
             npc.noTileCollide = true;
             npc.noGravity = true;
@@ -59,7 +59,7 @@ namespace TenebraeMod.NPCs
 		}
 
 		public override void CustomBehavior() {
-			if (Main.netMode != 2) {
+			if (Main.netMode != NetmodeID.Server) {
 				if (attackCooldown == 0) {
 					Main.PlaySound(SoundID.Item, npc.position, 122);
 					laser = Projectile.NewProjectile(npc.Center.X,npc.Center.Y,npc.velocity.X,npc.velocity.Y,ProjectileType<QuasarCrawlerLaser>(),100,2f,Main.myPlayer,0,npc.whoAmI);
@@ -70,7 +70,7 @@ namespace TenebraeMod.NPCs
 			}
 
 			if (attackCooldown >= 60) {
-				if (Main.netMode != 2 && laser != -1) {
+				if (Main.netMode != NetmodeID.Server && laser != -1) {
 					Main.projectile[laser].Kill();
 					laser = -1;
 				}
@@ -93,10 +93,10 @@ namespace TenebraeMod.NPCs
 		public override void SetDefaults() {
             npc.aiStyle = -1;
             npc.width = 32;
-            npc.height = 32;
-			npc.defense = 80;
+            npc.height = 42;
+			npc.defense = 60;
 			npc.damage = 110;
-			npc.lifeMax = 6000;
+			npc.lifeMax = 8000;
             npc.knockBackResist = 0f;
             npc.noTileCollide = true;
             npc.noGravity = true;
@@ -130,11 +130,11 @@ namespace TenebraeMod.NPCs
 
 		public override void SetDefaults() {
             npc.aiStyle = -1;
-            npc.width = 38;
+            npc.width = 52;
             npc.height = 38;
-			npc.defense = 40;
+			npc.defense = 30;
 			npc.damage = 80;
-			npc.lifeMax = 6000;
+			npc.lifeMax = 8000;
             npc.knockBackResist = 0f;
             npc.noTileCollide = true;
             npc.noGravity = true;
@@ -161,7 +161,7 @@ namespace TenebraeMod.NPCs
 	public abstract class QuasarCrawler : Worm
 	{
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("Convective Wanderer");
+			DisplayName.SetDefault("Quasared Crawler");
 		}
 
 		public override void SetDefaults() {
@@ -213,7 +213,7 @@ namespace TenebraeMod.NPCs
 			if (Main.player[npc.target].dead && npc.timeLeft > 300) {
 				npc.timeLeft = 300;
 			}
-			if (Main.netMode != 1) {
+			if (Main.netMode != NetmodeID.MultiplayerClient) {
 				if (!tail && npc.ai[0] == 0f) {
 					if (head) {
 						npc.ai[3] = (float)npc.whoAmI;
@@ -242,8 +242,8 @@ namespace TenebraeMod.NPCs
 					npc.life = 0;
 					npc.HitEffect(0, 10.0);
 				}
-				if (!npc.active && Main.netMode == 2) {
-					NetMessage.SendData(28, -1, -1, null, npc.whoAmI, -1f, 0f, 0f, 0, 0, 0);
+				if (!npc.active && Main.netMode == NetmodeID.Server) {
+					NetMessage.SendData(MessageID.StrikeNPC, -1, -1, null, npc.whoAmI, -1f, 0f, 0f, 0, 0, 0);
 				}
 			}
 			int num180 = (int)(npc.position.X / 16f) - 1;
@@ -275,7 +275,7 @@ namespace TenebraeMod.NPCs
 								if (Main.rand.NextBool(100) && npc.behindTiles && Main.tile[num184, num185].nactive()) {
 									WorldGen.KillTile(num184, num185, true, true, false);
 								}
-								if (Main.netMode != 1 && Main.tile[num184, num185].type == 2) {
+								if (Main.netMode != NetmodeID.MultiplayerClient && Main.tile[num184, num185].type == 2) {
 									ushort arg_BFCA_0 = Main.tile[num184, num185 - 1].type;
 								}
 							}
@@ -408,20 +408,20 @@ namespace TenebraeMod.NPCs
 							}
 						}
 						if (flag20) {
-							if (Main.netMode != 1 && (double)(npc.position.Y / 16f) > (Main.rockLayer + (double)Main.maxTilesY) / 2.0) {
+							if (Main.netMode != NetmodeID.MultiplayerClient && (double)(npc.position.Y / 16f) > (Main.rockLayer + (double)Main.maxTilesY) / 2.0) {
 								npc.active = false;
 								int num200 = (int)npc.ai[0];
 								while (num200 > 0 && num200 < 200 && Main.npc[num200].active && Main.npc[num200].aiStyle == npc.aiStyle) {
 									int num201 = (int)Main.npc[num200].ai[0];
 									Main.npc[num200].active = false;
 									npc.life = 0;
-									if (Main.netMode == 2) {
-										NetMessage.SendData(23, -1, -1, null, num200, 0f, 0f, 0f, 0, 0, 0);
+									if (Main.netMode == NetmodeID.Server) {
+										NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, num200, 0f, 0f, 0f, 0, 0, 0);
 									}
 									num200 = num201;
 								}
-								if (Main.netMode == 2) {
-									NetMessage.SendData(23, -1, -1, null, npc.whoAmI, 0f, 0f, 0f, 0, 0, 0);
+								if (Main.netMode == NetmodeID.Server) {
+									NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npc.whoAmI, 0f, 0f, 0f, 0, 0, 0);
 								}
 							}
 							num191 = 0f;
@@ -429,7 +429,7 @@ namespace TenebraeMod.NPCs
 						}
 					}
 					bool flag21 = false;
-					if (npc.type == 87) {
+					if (npc.type == NPCID.WyvernHead) {
 						if ((npc.velocity.X > 0f && num191 < 0f || npc.velocity.X < 0f && num191 > 0f || npc.velocity.Y > 0f && num192 < 0f || npc.velocity.Y < 0f && num192 > 0f) && System.Math.Abs(npc.velocity.X) + System.Math.Abs(npc.velocity.Y) > num189 / 2f && num193 < 300f) {
 							flag21 = true;
 							if (System.Math.Abs(npc.velocity.X) + System.Math.Abs(npc.velocity.Y) < num188) {
