@@ -10,18 +10,22 @@ namespace TenebraeMod.Items.Weapons
 {
     public class NebulaVaporwave : ModItem
     {
+        public override void SetStaticDefaults()
+        {
+            Tooltip.SetDefault("'/music plays'");
+        }
 
         public override void SetDefaults()
         {
             item.width = 22;
-            item.height = 42;
+            item.height = 40;
             item.value = 100000;
             item.rare = ItemRarityID.Red;
             item.damage = 75;
             item.magic = true;
             item.knockBack = 4f;
             item.holdStyle = 0;
-            item.useStyle = 4;
+            item.useStyle = ItemUseStyleID.HoldingUp;
             item.shootSpeed = 10f;
             item.shoot = mod.ProjectileType("Vaporwave");
             item.noMelee = true;
