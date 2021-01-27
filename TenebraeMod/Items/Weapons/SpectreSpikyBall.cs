@@ -35,10 +35,10 @@ namespace TenebraeMod.Items.Weapons
 
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.SpikyBall,75);
+            recipe.AddIngredient(ItemID.SpikyBall,25);
             recipe.AddIngredient(ItemID.SpectreBar);
             recipe.AddTile(TileID.MythrilAnvil);
-            recipe.SetResult(this,75);
+            recipe.SetResult(this,25);
             recipe.AddRecipe();
         }
     }
@@ -54,7 +54,7 @@ namespace TenebraeMod.Items.Weapons
 			projectile.aiStyle = -1;
 			projectile.width = 14;
 			projectile.height = 14;
-			projectile.penetrate = 20;
+			projectile.penetrate = 10;
 			projectile.friendly = true;
 			projectile.tileCollide = false;
             projectile.light = 0.5f;

@@ -36,7 +36,7 @@ namespace TenebraeMod.Items.Weapons
 
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.SpikyBall,75);
+            recipe.AddIngredient(ItemID.SpikyBall,25);
             recipe.AddIngredient(ItemID.ShroomiteBar);
             recipe.AddTile(TileID.Autohammer);
             recipe.SetResult(this,25);
@@ -61,7 +61,8 @@ namespace TenebraeMod.Items.Weapons
 			projectile.tileCollide = true;
 		}
 
-        public override void AI() {
+        public override void AI() 
+        {
             projectile.ai[0] += 1f;
 			if (projectile.ai[0] > 5f)
 			{
@@ -108,7 +109,7 @@ namespace TenebraeMod.Items.Weapons
         }
 
         public override void Kill(int timeLeft) {
-            for (int i=0; i<16; i++) {
+            for (int i=0; i<8; i++) {
                 Projectile shot = Main.projectile[Projectile.NewProjectile(projectile.Center,new Vector2(0,-4).RotatedByRandom(Math.PI),ProjectileType<ShroomiteSpikyBallSpore>(),projectile.damage,projectile.knockBack,projectile.owner)];
             }
         }
@@ -116,10 +117,11 @@ namespace TenebraeMod.Items.Weapons
 
     internal class ShroomiteSpikyBallSpore : ModProjectile {
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("Spore");
-		}
+			DisplayName.SetDefault("Shroomite Spore");
+            Main.projFrames[projectile.type] = 4;
+        }
 
-		public override void SetDefaults() {
+        public override void SetDefaults() {
 			projectile.thrown = true;
 			projectile.aiStyle = -1;
 			projectile.width = 12;
@@ -132,7 +134,16 @@ namespace TenebraeMod.Items.Weapons
             projectile.alpha = 64;
 		}
 
-        public override void AI() {
+        public override void AI() 
+        {
+            if (++projectile.frameCounter >= 8)
+            {
+                projectile.frameCounter = 0;
+                if (++projectile.frame >= Main.projFrames[projectile.type])
+                {
+                    projectile.frame = 0;
+                }
+            }
             projectile.velocity *= 0.99f;
             projectile.rotation = projectile.velocity.ToRotation()+(float)Math.PI/2;
             projectile.alpha++;
