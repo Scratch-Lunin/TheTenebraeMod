@@ -2,6 +2,11 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
+using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.Graphics.Effects;
+using Terraria.Graphics.Shaders;
 
 namespace TenebraeMod
 {
@@ -32,5 +37,11 @@ namespace TenebraeMod
 			});
 			RecipeGroup.RegisterGroup("TenebraeMod:CobaltBar", cobaltbar);
 		}
+		public override void Load()
+		{
+           		 Main.logoTexture = ModContent.GetTexture("TenebraeMod/Properties/Logo");
+                  	 Main.logo2Texture = ModContent.GetTexture("TenebraeMod/Properties/Logo2");
+		}
+
 	}
 }
