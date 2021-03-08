@@ -15,6 +15,7 @@ namespace TenebraeMod.Projectiles
         private NPC target;
 		public override void SetStaticDefaults() {
 			DisplayName.SetDefault("Binary Star Flare");
+			Main.projFrames[projectile.type] = 5;
 		}
 
 		public override void SetDefaults() {
@@ -31,8 +32,17 @@ namespace TenebraeMod.Projectiles
 			projectile.light = 1f;
 		}
 
-		public override void AI() {
-            projectile.rotation += 0.1f;
+		public override void AI() 
+		{
+			if (++projectile.frameCounter >= 6)
+			{
+				projectile.frameCounter = 0;
+				if (++projectile.frame >= Main.projFrames[projectile.type])
+				{
+					projectile.frame = 0;
+				}
+			}
+			projectile.rotation += 0.1f;
 
 			Vector2 position69 = projectile.position;
 			int width65 = projectile.width;
