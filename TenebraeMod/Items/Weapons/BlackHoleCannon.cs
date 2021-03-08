@@ -22,7 +22,7 @@ namespace TenebraeMod.Items.Weapons
         {
             item.damage = 50;
             item.ranged = true;
-            item.width = 74;
+            item.width = 64;
             item.height = 32;
             item.useTime = 20;
             item.useAnimation = 20;
@@ -31,7 +31,7 @@ namespace TenebraeMod.Items.Weapons
             item.knockBack = 7;
             item.value = 100000;
             item.rare = ItemRarityID.Red;
-            item.UseSound = SoundID.Item22;
+            item.UseSound = SoundID.Item15;
             item.autoReuse = true;
             item.shoot = ProjectileID.PurificationPowder;
             item.shootSpeed = 16f;
@@ -90,7 +90,7 @@ namespace TenebraeMod.Items.Weapons
                         velocity.Normalize();
                     }
                     velocity *= item.shootSpeed;
-                    Projectile.NewProjectile(player.Center.X, player.Center.Y, velocity.X, velocity.Y, ProjectileType<Gravamine>(), item.damage + ammoDamage, item.knockBack, player.whoAmI);
+                    Projectile.NewProjectile(player.Center.X, player.Center.Y, velocity.X, velocity.Y, ProjectileType<Gravimine>(), item.damage + ammoDamage, item.knockBack, player.whoAmI);
                 }
                 //set bullet type
                 Main.PlaySound(SoundID.Item, player.Center, 61);

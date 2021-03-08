@@ -5,6 +5,7 @@ using static Terraria.ModLoader.ModContent;
 using Microsoft.Xna.Framework;
 using TenebraeMod.Projectiles;
 using System;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TenebraeMod.Items.Weapons
 {
@@ -21,8 +22,8 @@ namespace TenebraeMod.Items.Weapons
 		public override void SetDefaults() {
 			item.damage = 90;
 			item.melee = true;
-			item.width = 60;
-			item.height = 40;
+			item.width = 74;
+			item.height = 66;
 			item.useTime = 40;
 			item.useAnimation = 40;
 			item.useStyle = ItemUseStyleID.HoldingOut;
@@ -44,7 +45,26 @@ namespace TenebraeMod.Items.Weapons
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}
-
+		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+		{
+			Texture2D texture = mod.GetTexture("Items/Weapons/BinaryStar_glowmask");
+			spriteBatch.Draw
+			(
+				texture,
+				new Vector2
+				(
+					item.position.X - Main.screenPosition.X + item.width * 0.5f,
+					item.position.Y - Main.screenPosition.Y + item.height - texture.Height * 0.5f + 2f
+				),
+				new Rectangle(0, 0, texture.Width, texture.Height),
+				Color.White,
+				rotation,
+				texture.Size() * 0.5f,
+				scale,
+				SpriteEffects.None,
+				0f
+			);
+		}
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
 			int shot = Projectile.NewProjectile(player.Center,new Vector2(speedX,speedY),type,damage,knockBack,player.whoAmI,0,0);
