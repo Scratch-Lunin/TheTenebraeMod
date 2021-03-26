@@ -1,11 +1,11 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TenebraeMod.Projectiles
 {
-    public class HellFlameBurst : ModProjectile
+    public class HellflameBurst : ModProjectile
     {
         public override void SetStaticDefaults()
         {
@@ -13,8 +13,8 @@ namespace TenebraeMod.Projectiles
         }
         public override void SetDefaults()
         {
-            projectile.width = 75;
-            projectile.height = 156;
+            projectile.width = 58;
+            projectile.height = 58;
             projectile.alpha = 0;
             projectile.friendly = true;
             projectile.tileCollide = false;
