@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using TenebraeMod.Projectiles;
 using Terraria;
 using Terraria.ID;
