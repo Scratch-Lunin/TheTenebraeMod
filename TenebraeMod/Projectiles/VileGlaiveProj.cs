@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -18,9 +18,8 @@ namespace TenebraeMod.Projectiles
 			projectile.height = 102;
 			projectile.aiStyle = 19;
 			projectile.penetrate = -1;
-			projectile.scale = 1.3f;
+			projectile.scale = 1.2f;
 			projectile.alpha = 0;
-
 			projectile.hide = true;
 			projectile.ownerHitCheck = true;
 			projectile.melee = true;
