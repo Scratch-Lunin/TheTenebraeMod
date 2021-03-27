@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,8 +31,8 @@ namespace TenebraeMod.Projectiles
 			if (Main.rand.NextBool())
 			{
 				Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, 75);
-				dust.noGravity = false;
-				dust.scale = 1.5f;
+				dust.noGravity = true;
+				dust.scale = 1.2f;
 			}
 
 			if (++projectile.frameCounter >= 6)
