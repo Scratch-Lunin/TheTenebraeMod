@@ -20,10 +20,11 @@ namespace TenebraeMod.Items.Weapons
 
         public override void SetDefaults()
         {
-            item.damage = 50;
+            item.damage = 55;
             item.ranged = true;
             item.width = 64;
             item.height = 32;
+            item.scale = 0.9f;
             item.useTime = 20;
             item.useAnimation = 20;
             item.useStyle = ItemUseStyleID.HoldingOut;
@@ -37,6 +38,10 @@ namespace TenebraeMod.Items.Weapons
             item.shootSpeed = 16f;
             item.channel = true;
             item.useAmmo = AmmoID.Rocket;
+        }
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(-5, 0);
         }
 
         public override bool ConsumeAmmo(Player player)
