@@ -292,8 +292,8 @@ namespace TenebraeMod {
             recipe.AddIngredient(ItemID.MedicatedBandage);
             recipe.AddIngredient(ItemID.ThePlan);
             recipe.AddIngredient(ItemID.CountercurseMantra);
-            recipe.AddIngredient(ItemID.Blindfold);
-            recipe.AddIngredient(null, "ReflectiveGlove");
+            recipe.AddIngredient(ItemID.HandWarmer);
+            recipe.AddIngredient(null, "BlindGlasses");
             recipe.AddTile(TileID.TinkerersWorkbench);
             recipe.SetResult(ItemID.AnkhCharm);
             recipe.AddRecipe();
