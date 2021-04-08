@@ -1,23 +1,37 @@
 using TenebraeMod.Buffs;
 using TenebraeMod.Dusts;
-using TenebraeMod.Items;
-using TenebraeMod.NPCs;
-using TenebraeMod.Projectiles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 
-namespace TenebraeMod {
-	public class TenebraeModPlayer : ModPlayer {
+namespace TenebraeMod
+{
+    public class TenebraeModPlayer : ModPlayer 
+    {
+        public int InpuratusDeathShake;
+
+        public override void ModifyScreenPosition()
+        {
+            if (TenebraeModWorld.InpuratusDies == true)
+            {
+                InpuratusDeathShake++;
+                float intensity = 10f;
+                if (InpuratusDeathShake >= 1)
+                {
+                    Main.screenPosition += new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    Main.screenPosition -= new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    intensity *= 0.9f;
+                    if (InpuratusDeathShake == 30)
+                    {
+                        TenebraeModWorld.InpuratusDies = false;
+                        InpuratusDeathShake = 0;
+                    }
+                }
+            }
+        }
+
         public bool fleshGauntlet;
         public bool holyflames;
         int holydamage = 0;
