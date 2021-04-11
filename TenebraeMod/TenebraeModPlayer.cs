@@ -11,6 +11,7 @@ namespace TenebraeMod
     public class TenebraeModPlayer : ModPlayer 
     {
         public int InpuratusDeathShake;
+        public int DashShakeTimer;
 
         public override void ModifyScreenPosition()
         {
@@ -27,6 +28,23 @@ namespace TenebraeMod
                     {
                         TenebraeModWorld.InpuratusDies = false;
                         InpuratusDeathShake = 0;
+                    }
+                }
+            }
+
+            if (TenebraeModWorld.DashShake == true)
+            {
+                DashShakeTimer++;
+                float intensity = 3f;
+                if (DashShakeTimer >= 1)
+                {
+                    Main.screenPosition += new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    Main.screenPosition -= new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    intensity *= 0.9f;
+                    if (DashShakeTimer == 15)
+                    {
+                        TenebraeModWorld.DashShake = false;
+                        DashShakeTimer = 0;
                     }
                 }
             }
