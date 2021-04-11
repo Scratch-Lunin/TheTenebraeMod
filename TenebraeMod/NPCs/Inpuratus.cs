@@ -1,12 +1,12 @@
+using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using TenebraeMod.Items.Misc;
+using TenebraeMod.Items;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Terraria.Graphics.Shaders;
-using Terraria.Graphics.Effects;
 
 namespace TenebraeMod.NPCs
 {
@@ -14,11 +14,14 @@ namespace TenebraeMod.NPCs
     public class Inpuratus : ModNPC
     {
         public int Ohyeahphase2;
-        public int lmaotheplayerisdead;
+        public int PlayerKilled;
+        public int Phase2entrance;
+        public int stop;
+        public int misc;
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Inpuratus");
-            Main.npcFrameCount[npc.type] = 1;
+            Main.npcFrameCount[npc.type] = 20;
             NPCID.Sets.TrailCacheLength[npc.type] = 5;
             NPCID.Sets.TrailingMode[npc.type] = 0;
         }
@@ -27,7 +30,7 @@ namespace TenebraeMod.NPCs
             music = MusicID.Boss3;
             musicPriority = MusicPriority.BossLow;
             npc.width = 118;
-            npc.height = 188;
+            npc.height = 208;
             npc.damage = 30;
             npc.noGravity = true;
             npc.noTileCollide = true;
@@ -45,7 +48,20 @@ namespace TenebraeMod.NPCs
             npc.buffImmune[BuffID.CursedInferno] = true;
             bossBag = ModContent.ItemType<InpuratusBag>();
         }
-
+        public override void FindFrame(int frameHeight)
+        {
+            npc.spriteDirection = npc.direction;
+            npc.frameCounter++;
+            if (npc.frameCounter >= 8)
+            {
+                npc.frame.Y += frameHeight;
+                npc.frameCounter = 0;
+                if (npc.frame.Y >= Main.npcFrameCount[npc.type] * frameHeight)
+                {
+                    npc.frame.Y = 0;
+                }
+            }
+        }
         public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
         {
             npc.lifeMax = (int)(npc.lifeMax * 0.625f * bossLifeScale);
@@ -81,26 +97,17 @@ namespace TenebraeMod.NPCs
         {
             if (npc.life <= 0)
             {
+                TenebraeModWorld.InpuratusDies = true;
                 for (int i = 0; i < 8; i++)
                 {
                     Gore.NewGore(npc.position, npc.velocity, mod.GetGoreSlot("Gores/InpuratusGore" + i), npc.scale);
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
-        {
-            for (int i = 0; i < npc.oldPos.Length; i++)
-            {
-                Texture2D texture = Main.npcTexture[npc.type];
-                Vector2 trailPosition = npc.oldPos[i] - Main.screenPosition + (npc.Center - npc.position) + new Vector2(0f, Main.NPCAddHeight(npc.whoAmI) + npc.gfxOffY);
-                Color color = npc.GetAlpha(drawColor) * ((float)(npc.oldPos.Length - i) / (float)npc.oldPos.Length);
-                spriteBatch.Draw(texture, trailPosition, npc.frame, color, npc.rotation, npc.frame.Size() * 0.5f, npc.scale, SpriteEffects.None, 0f);
-            }
-            return true;
-        }
 
         public override void AI()
         {
+            #region Misc
             if (npc.ai[0] == 0)
             {
                 npc.TargetClosest();
@@ -112,15 +119,20 @@ namespace TenebraeMod.NPCs
                 Vector2 vector = player.Center - npc.Center;
                 npc.rotation = vector.ToRotation() - MathHelper.PiOver2;
             }
-            if (!player.ZoneCorrupt)
+            /*if (!player.ZoneCorrupt)
             {
                 npc.velocity *= 20;
                 npc.damage = 90;
-            }
+            }*/
             //Lighting.AddLight(npc.Center, Color.Purple);
-            Vector2 vel = player.Center - npc.Center;
-            vel.Normalize();
-            npc.velocity = vel * 4;
+            if (npc.ai[0] < 320)
+            {
+                Vector2 vel = player.Center - npc.Center;
+                vel.Normalize();
+                npc.velocity = vel * 4;
+            }
+            #endregion
+            #region PlayerDeath
             Player P = Main.player[npc.target];
             if (npc.target < 0 || npc.target == 255 || Main.player[npc.target].dead || !Main.player[npc.target].active)
             {
@@ -128,18 +140,18 @@ namespace TenebraeMod.NPCs
                 P = Main.player[npc.target];
                 if (!P.active || P.dead)
                 {
-                    lmaotheplayerisdead++;
+                    PlayerKilled++;
 
-                    if (lmaotheplayerisdead >= 1)
+                    if (PlayerKilled >= 1)
                     {
                         npc.velocity = Vector2.Zero;
                     }
-                    if (lmaotheplayerisdead == 120)
+                    if (PlayerKilled == 100)
                     {
-                        Main.PlaySound(SoundID.Roar, npc.position, 0);
+                        Main.PlaySound(SoundID.Roar, npc.Center, 0);
                         npc.rotation -= (6 * npc.direction);
                     }
-                    if (lmaotheplayerisdead >= 140)
+                    if (PlayerKilled >= 140)
                     {
                         npc.velocity = new Vector2(0f, 20f);
                         npc.rotation -= (6 * npc.direction);
@@ -150,157 +162,32 @@ namespace TenebraeMod.NPCs
                         dust.fadeIn = 0.1973684f;
 
                     }
-                    if (lmaotheplayerisdead == 200)
+                    if (PlayerKilled == 200)
                     {
                         npc.active = false;
                         Main.NewText("Inpuratus laughs at your failure.");
                     }
                 }
             }
+            #endregion
+            #region Misc
             npc.direction = 1;
             float moveSpeed = 3;
             if (npc.Distance(P.MountedCenter) > 120)
             {
                 moveSpeed = 3 + (npc.Distance(P.MountedCenter) - 120) / 40;
             }
-
-            if (npc.ai[0] == 30)
+            #endregion
+            #region Phase1
+            float[] shootTimes = new float[] { 30f, 40f, 50f, 60f, 70f, 90f, 120f, 150f, 200f }; // Defining this makes it a little easier to check when to shoot.
+            if (shootTimes.Contains(npc.ai[0])) // If the array contains projectile.ai[0], then projectile.ai[0] has to equal one of the values in the array.
             {
                 npc.TargetClosest();
                 if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
                 {
                     Vector2 position = npc.Center;
                     Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 40)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 50)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 60)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 70)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 90)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 120)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 150)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 5f;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    int damage = 25;
-                    Main.PlaySound(SoundID.Item, npc.Center, 43);
-                    Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                }
-            }
-            if (npc.ai[0] == 200)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
+                    Vector2 direction = npc.DirectionTo(player.Center);
                     float speed = 5f;
                     int type = mod.ProjectileType("CorruptedCrystalProjectile");
                     int damage = 25;
@@ -317,113 +204,96 @@ namespace TenebraeMod.NPCs
                     Vector2 targetPosition = Main.player[npc.target].Center;
                     Vector2 direction = targetPosition - position;
                     direction.Normalize();
-                    Main.PlaySound(SoundID.Item, (int)npc.position.X, (int)npc.position.Y, 2);
                     float rotation = npc.rotation;
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
                         NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, (int)NPCID.DevourerHead);
-                        Main.PlaySound(SoundID.NPCKilled, npc.Center, 13);
+                        Main.PlaySound(SoundID.NPCHit, npc.Center, 1);
                     }
                 }
             }
-            if (npc.ai[0] == 310)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 12f;
-                    int damage = 35;
-                    int type = mod.ProjectileType("CorruptedCrystalProjectile");
-                    Main.PlaySound(SoundID.Item, (int)npc.position.X, (int)npc.position.Y, 2);
-                    float rotation = npc.rotation;
-                    {
-                        for (int i = 0; i < 10; ++i)
-                            Projectile.NewProjectile(position, (direction * speed).RotatedBy(MathHelper.Pi), type, damage, 0f, Main.myPlayer);
-                        Main.PlaySound(SoundID.Item, npc.Center, 43);
 
-                    }
-                }
-            }
-            if (npc.ai[0] >= 320)
+            if (npc.ai[0] >= 320) // Changes to >= so all this code runs.
             {
                 npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
+
+                if (npc.HasValidTarget && npc.ai[0] == 320) // Only dash and roar once.
                 {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 0f;
-                    int damage = 35;
-                    int type = ProjectileID.EyeFire;
-                    float rotation = npc.rotation;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    Main.PlaySound(SoundID.Roar, npc.Center, 0);
+                    npc.velocity = npc.DirectionTo(Main.player[npc.target].Center) * 35f;
+                    TenebraeModWorld.DashShake = true;
+                }
+
+                if ((npc.ai[0] - 320) % 5 == 0 && Main.netMode != NetmodeID.MultiplayerClient) // Spawn fire every 5 frames.
+                {
+                    Projectile.NewProjectile(npc.Center, Vector2.Zero, ProjectileID.EyeFire, 35, 0f, Main.myPlayer);
+                }
+
+                if (npc.ai[0] >= 340) // Slow down 20 ticks after the dash
+                {
+                    npc.velocity *= 0.85f;
+                }
+
+                if (npc.ai[0] == 400) // Reset the ai
+                {
+                    npc.ai[0] = 0;
+                }
+                #endregion
+                #region Phase2
+                if (npc.life <= 9000)
+                {
+                    stop++;
+                    misc++;
+                    Ohyeahphase2++;
+                    if (misc == 1)
                     {
-                        npc.velocity += new Vector2(npc.direction * 35f, npc.direction * 35f);
-                        //npc.velocity = vel * 30;
-                        Main.PlaySound(SoundID.Roar, npc.Center, 3);
-                        Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
+                        Phase2entrance = 2;
+                    }
+                    if (stop >= 1)
+                    {
+                        //npc.velocity = Vector2.Zero;
+                    }
+
+                    if (Phase2entrance == 2)
+                    {
+                        int amount = 16;
+
+                        TenebraeModWorld.InpuratusDies = true; //maybe
+                        for (int i = 0; i < amount; ++i)
+                        {
+                            float currentRotation = (MathHelper.TwoPi / amount) * i;
+                            Vector2 projectileVelocity = currentRotation.ToRotationVector2() * 4;
+
+                            float speed = 40f;
+                            Vector2 vector8 = new Vector2(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2));
+                            int damage = 35;
+                            int type = mod.ProjectileType("CorruptedCrystalProjectile");
+                            Projectile.NewProjectile(npc.Center, projectileVelocity, type, damage, 0, Main.myPlayer);
+                            Phase2entrance = 3;
+                        }
+                        if (Phase2entrance == 3)
+                        {
+                            int amount2 = 12;
+
+                            TenebraeModWorld.InpuratusDies = true; //maybe
+                            for (int i = 0; i < amount2; ++i)
+                            {
+                                float currentRotation = (MathHelper.TwoPi / amount2) * i;
+                                Vector2 projectileVelocity = currentRotation.ToRotationVector2() * 6;
+
+                                float speed = 40f;
+                                Vector2 vector8 = new Vector2(npc.position.X + (npc.width / 2), npc.position.Y + (npc.height / 2));
+                                int damage = 35;
+                                int type = mod.ProjectileType("CorruptedCrystalProjectile");
+                                Projectile.NewProjectile(npc.Center, projectileVelocity, type, damage, 0, Main.myPlayer);
+                                Phase2entrance = 0;
+                            }
+                        }
                     }
                 }
-            }
-            if (npc.ai[0] >= 350)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float rotation = npc.rotation;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        npc.velocity = vel * 4;
-                    }
-                }
-            }
-            if (npc.ai[0] >= 360)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float speed = 0f;
-                    int type = ProjectileID.EyeFire;
-                    int damage = 35;
-                    float rotation = npc.rotation;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        npc.velocity += new Vector2(npc.direction * 35f, npc.direction * 35f);
-                        //npc.velocity = vel * 30;
-                        Main.PlaySound(SoundID.Roar, npc.Center, 3);
-                        Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
-                    }
-                }
-            }
-            if (npc.ai[0] >= 360)
-            {
-                npc.TargetClosest();
-                if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
-                {
-                    Vector2 position = npc.Center;
-                    Vector2 targetPosition = Main.player[npc.target].Center;
-                    Vector2 direction = targetPosition - position;
-                    direction.Normalize();
-                    float rotation = npc.rotation;
-                    if (Main.netMode != NetmodeID.MultiplayerClient)
-                    {
-                        npc.velocity = vel * 4;
-                        npc.ai[0] = 0;
-                    }
-                }
+
+
+                #endregion
             }
         }
     }
