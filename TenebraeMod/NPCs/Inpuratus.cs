@@ -87,8 +87,8 @@ namespace TenebraeMod.NPCs
                 Item.NewItem(npc.position, ItemID.RottenChunk, 50 + Main.rand.Next(10));
                 var dropChooser = new WeightedRandom<int>();
                 dropChooser.Add(ItemID.ClingerStaff, 5);
-                dropChooser.Add(ModContent.ItemType<Items.Weapons.VileGlaive>(), 5);
-                dropChooser.Add(ModContent.ItemType<Items.Weapons.CursedCarbine>(), 5);
+                dropChooser.Add(ModContent.ItemType<Items.Weapons.Melee.VileGlaive>(), 5);
+                dropChooser.Add(ModContent.ItemType<Items.Weapons.Ranger.CursedCarbine>(), 5);
                 int choice = dropChooser;
                 Item.NewItem(npc.getRect(), choice);
             }
@@ -165,7 +165,7 @@ namespace TenebraeMod.NPCs
                     if (PlayerKilled == 200)
                     {
                         npc.active = false;
-                        Main.NewText("Inpuratus laughs at your failure.");
+                        Main.NewText("Inpuratus laughs at your failure...", 10, 127, 23, false);
                     }
                 }
             }
@@ -207,7 +207,12 @@ namespace TenebraeMod.NPCs
                     float rotation = npc.rotation;
                     if (Main.netMode != NetmodeID.MultiplayerClient)
                     {
-                        NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, (int)NPCID.DevourerHead);
+                        int minionCount = Main.rand.Next(2, 5);
+                        for (int i = 0; i < minionCount; i++)
+                        {
+
+                            NPC.NewNPC((int)npc.position.X + Main.rand.Next(0, 201), (int)npc.position.Y + Main.rand.Next(0, 201), (int)mod.NPCType("VileLeechHead"), 0, npc.whoAmI);
+                        }
                         Main.PlaySound(SoundID.NPCHit, npc.Center, 1);
                     }
                 }
