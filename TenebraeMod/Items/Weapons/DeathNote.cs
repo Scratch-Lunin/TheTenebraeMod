@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ID;
 
 namespace TenebraeMod.Items.Weapons
 {
@@ -22,9 +23,9 @@ namespace TenebraeMod.Items.Weapons
             item.reuseDelay = 4;
             item.autoReuse = true;
             item.channel = true;
-            item.useStyle = 5;
+            item.useStyle = ItemUseStyleID.HoldingOut;
             item.value = 0;
-            item.rare = 10;
+            item.rare = ItemRarityID.Red;
             item.shoot = mod.ProjectileType("DeathNote");
         }
 
