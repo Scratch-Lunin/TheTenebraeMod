@@ -1,9 +1,7 @@
 using TenebraeMod.Dusts;
-using TenebraeMod.Items;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TenebraeMod.NPCs
@@ -41,7 +39,7 @@ namespace TenebraeMod.NPCs
 
         	public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
 		{
-			lastHitFromTrueHolyflame = projectile.type == ModContent.ProjectileType<Projectiles.TrueHolyFlame>();
+			lastHitFromTrueHolyflame = projectile.type == ModContent.ProjectileType<Projectiles.Mage.TrueHolyFlame>();
 		}
 
         	public override void ModifyHitByItem(NPC npc, Player player, Item item, ref int damage, ref float knockback, ref bool crit)
