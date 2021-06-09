@@ -7,6 +7,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TenebraeMod.NPCs
 {
@@ -105,6 +106,13 @@ namespace TenebraeMod.NPCs
             }
         }
 
+        public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
+        {
+            var GlowMask = mod.GetTexture("NPCs/Inpuratus_glowmask");
+            var Effects = npc.spriteDirection == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            spriteBatch.Draw(GlowMask, npc.Center - Main.screenPosition + new Vector2(-1 , npc.gfxOffY), npc.frame, Color.White, npc.rotation, npc.frame.Size() / 2, npc.scale, Effects, 0);
+        }
+
         public override void AI()
         {
             #region Misc
@@ -195,7 +203,7 @@ namespace TenebraeMod.NPCs
                     Projectile.NewProjectile(position, direction * speed, type, damage, 0f, Main.myPlayer);
                 }
             }
-            if (npc.ai[0] == 290)
+            if (npc.ai[0] == 290) //summon minions
             {
                 npc.TargetClosest();
                 if (npc.HasValidTarget && Main.netMode != NetmodeID.MultiplayerClient)
@@ -210,8 +218,7 @@ namespace TenebraeMod.NPCs
                         int minionCount = Main.rand.Next(2, 5);
                         for (int i = 0; i < minionCount; i++)
                         {
-
-                            NPC.NewNPC((int)npc.position.X + Main.rand.Next(0, 201), (int)npc.position.Y + Main.rand.Next(0, 201), (int)mod.NPCType("VileLeechHead"), 0, npc.whoAmI);
+                            NPC.NewNPC((int)npc.position.X + Main.rand.Next(0, 201), (int)npc.position.Y + Main.rand.Next(0, 201), ModContent.NPCType<VileLeechHead>(), 0, npc.whoAmI, 0);
                         }
                         Main.PlaySound(SoundID.NPCHit, npc.Center, 1);
                     }
