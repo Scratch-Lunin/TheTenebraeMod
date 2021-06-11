@@ -34,10 +34,10 @@ namespace TenebraeMod.Items.Weapons.Ranger
 
         public override void AddRecipes() {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.SpikyBall,10);
+            recipe.AddIngredient(ItemID.SpikyBall,20);
             recipe.AddIngredient(ItemID.Gel);
             recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(this,10);
+            recipe.SetResult(this,20);
             recipe.AddRecipe();
         }
     }
