@@ -66,10 +66,14 @@ namespace TenebraeMod.Items.Weapons.Ranger
             projectile.rotation += projectile.velocity.X * 0.1f;
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit) {
-            projectile.magic = true;
-            projectile.ghostHeal(damage,target.Center);
-            projectile.magic = false;
+        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit) 
+        {
+            if (target.type != NPCID.TargetDummy && !target.friendly && target.lifeMax > 5)
+            {
+                projectile.magic = true;
+                projectile.ghostHeal(damage, target.Center);
+                projectile.magic = false;
+            }
         }
     }
 }
