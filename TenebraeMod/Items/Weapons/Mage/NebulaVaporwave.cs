@@ -21,7 +21,7 @@ namespace TenebraeMod.Items.Weapons.Mage
             item.height = 40;
             item.value = 100000;
             item.rare = ItemRarityID.Red;
-            item.damage = 75;
+            item.damage = 150;
             item.magic = true;
             item.knockBack = 4f;
             item.holdStyle = 0;
