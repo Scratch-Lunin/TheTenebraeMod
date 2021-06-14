@@ -7,6 +7,7 @@ using static Terraria.ModLoader.ModContent;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 
 namespace TenebraeMod {
     public class TenebraeModItem : GlobalItem
@@ -336,6 +337,17 @@ namespace TenebraeMod {
                     break;
             }
 
+            if (item.type == ItemID.MedicatedBandage)
+            {
+                foreach (TooltipLine x1 in tooltips)
+                {
+                    if (x1.mod == "Terraria" && x1.Name == "Tooltip0")
+                    {
+                        x1.text = "Immunity to Poison, Bleeding, and Feral Bite";
+                    }
+                }
+            }
+
             if (item.type == ItemID.Excalibur)
             {
                 TooltipLine tip = new TooltipLine(mod, "Placeable", "Critical hits buff the Exalibur's abilities");
@@ -346,6 +358,24 @@ namespace TenebraeMod {
             {
                 TooltipLine tip = new TooltipLine(mod, "Placeable", "Critical hits buff the True Exalibur's abilities");
                 tooltips.Add(tip);
+            }
+        }
+
+        public override void UpdateAccessory(Item item, Player player, bool hideVisual)
+        {
+            if (item.type == ItemID.MedicatedBandage)
+            {
+                player.buffImmune[BuffID.Rabies] = true;
+            }
+
+            if (item.type == ItemID.AnkhCharm)
+            {
+                player.buffImmune[BuffID.Rabies] = true;
+            }
+
+            if (item.type == ItemID.AnkhShield)
+            {
+                player.buffImmune[BuffID.Rabies] = true;
             }
         }
 

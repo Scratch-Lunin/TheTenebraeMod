@@ -41,31 +41,6 @@ namespace TenebraeMod
                         Item.NewItem(npc.Hitbox,ItemType<VenomAntidote>());
                     }
                     break;
-                case NPCID.GiantBat:
-                    if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
-                        Item.NewItem(npc.Hitbox,ItemType<FeralShots>());
-                    }
-                    break;
-                case NPCID.IlluminantBat:
-                    if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
-                        Item.NewItem(npc.Hitbox,ItemType<FeralShots>());
-                    }
-                    break;
-                case NPCID.Lavabat:
-                    if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
-                        Item.NewItem(npc.Hitbox,ItemType<FeralShots>());
-                    }
-                    break;
-                case NPCID.GiantFlyingFox:
-                    if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
-                        Item.NewItem(npc.Hitbox,ItemType<FeralShots>());
-                    }
-                    break;
-                case NPCID.Vampire:
-                    if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
-                        Item.NewItem(npc.Hitbox,ItemType<FeralShots>());
-                    }
-                    break;
             }
         }
 
