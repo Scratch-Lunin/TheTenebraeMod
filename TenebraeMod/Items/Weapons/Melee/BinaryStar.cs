@@ -47,7 +47,7 @@ namespace TenebraeMod.Items.Weapons.Melee
 		}
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
-			Texture2D texture = mod.GetTexture("Items/Weapons/BinaryStar_glowmask");
+			Texture2D texture = mod.GetTexture("Items/Weapons/Melee/BinaryStar_glowmask");
 			spriteBatch.Draw
 			(
 				texture,
