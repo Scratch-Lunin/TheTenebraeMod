@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.Achievements;
 using Terraria.ID;
@@ -13,8 +14,8 @@ namespace TenebraeMod.Projectiles.Melee
         public override void SetDefaults()
         {
             // while the sprite is actually bigger than 15x15, we use 15x15 since it lets the projectile clip into tiles as it bounces. It looks better.
-            projectile.width = 25;
-            projectile.height = 25;
+            projectile.width = 15;
+            projectile.height = 15;
             projectile.friendly = true;
             projectile.penetrate = 1;
             projectile.damage = 30;
@@ -24,9 +25,8 @@ namespace TenebraeMod.Projectiles.Melee
             projectile.tileCollide = true;
             //Can the projectile collide with tiles?			
             // 5 second fuse.
-            projectile.timeLeft = 200;
+                projectile.timeLeft = 200;
         }
-
 
         public override void AI()
         {
