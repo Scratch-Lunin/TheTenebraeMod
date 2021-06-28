@@ -1,50 +1,108 @@
 using TenebraeMod.Buffs;
 using TenebraeMod.Dusts;
-using TenebraeMod.Items;
-using TenebraeMod.NPCs;
-using TenebraeMod.Projectiles;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria.DataStructures;
 
-namespace TenebraeMod {
-	public class TenebraeModPlayer : ModPlayer {
-        public bool fleshGauntlet;
+namespace TenebraeMod
+{
+    public class TenebraeModPlayer : ModPlayer
+    {
+        public int InpuratusDeathShake;
+        public int DashShakeTimer;
+
+        static void Method(PlayerDrawInfo drawInfo)
+        {
+            if (drawInfo.shadow != 0f)
+            {
+                return;
+            }
+            Player drawPlayer = drawInfo.drawPlayer;
+            Vector2 Position = drawInfo.position;
+            float shadow = drawInfo.shadow;
+            float num44 = drawPlayer.stealth;
+            SpriteEffects spriteEffects = drawInfo.spriteEffects;
+            Color color12 = drawInfo.middleArmorColor;
+            DrawData value;
+            int shader12 = drawInfo.wingShader;
+            if ((drawPlayer.velocity.Y != 0f || drawPlayer.grappling[0] != -1) && !drawPlayer.mount.Active)
+            {
+                //Main.LoadItemFlames(1866); //unaccessible
+                Microsoft.Xna.Framework.Color color20 = color12;
+                int num63 = 24;
+                int num64 = 0;
+                if (shadow == 0f && drawPlayer.grappling[0] == -1)
+                {
+                    for (int m = 0; m < 7; m++)
+                    {
+                        Microsoft.Xna.Framework.Color color21 = new Microsoft.Xna.Framework.Color(250 - m * 10, 250 - m * 10, 250 - m * 10, 150 - m * 10);
+                        Vector2 value5 = new Vector2((float)Main.rand.Next(-10, 11) * 0.2f, (float)Main.rand.Next(-10, 11) * 0.2f);
+                        num44 *= num44;
+                        num44 *= 1f - shadow;
+                        color21 = new Microsoft.Xna.Framework.Color((int)((float)(int)color21.R * num44), (int)((float)(int)color21.G * num44), (int)((float)(int)color21.B * num44), (int)((float)(int)color21.A * num44));
+                        value5.X = drawPlayer.itemFlamePos[m].X;
+                        value5.Y = 0f - drawPlayer.itemFlamePos[m].Y;
+                        value5 *= 0.5f;
+                        value = new DrawData(Main.itemFlameTexture[1866], new Vector2((int)(Position.X - Main.screenPosition.X + (float)(drawPlayer.width / 2) - (float)(9 * drawPlayer.direction)) + num64 * drawPlayer.direction, (int)(Position.Y - Main.screenPosition.Y + (float)(drawPlayer.height / 2) + 2f * drawPlayer.gravDir + (float)num63 * drawPlayer.gravDir)) + value5, new Microsoft.Xna.Framework.Rectangle(0, Main.wingsTexture[drawPlayer.wings].Height / 7 * drawPlayer.wingFrame, Main.wingsTexture[drawPlayer.wings].Width, Main.wingsTexture[drawPlayer.wings].Height / 7 - 2), color21, drawPlayer.bodyRotation, new Vector2(Main.wingsTexture[drawPlayer.wings].Width / 2, Main.wingsTexture[drawPlayer.wings].Height / 14), 1f, spriteEffects, 0);
+                        value.shader = shader12;
+                        Main.playerDrawData.Add(value);
+                    }
+                }
+
+                value = new DrawData(Main.wingsTexture[drawPlayer.wings], new Vector2((int)(Position.X - Main.screenPosition.X + (float)(drawPlayer.width / 2) - (float)(9 * drawPlayer.direction)) + num64 * drawPlayer.direction, (int)(Position.Y - Main.screenPosition.Y + (float)(drawPlayer.height / 2) + 2f * drawPlayer.gravDir + (float)num63 * drawPlayer.gravDir)), new Microsoft.Xna.Framework.Rectangle(0, Main.wingsTexture[drawPlayer.wings].Height / 7 * drawPlayer.wingFrame, Main.wingsTexture[drawPlayer.wings].Width, Main.wingsTexture[drawPlayer.wings].Height / 7), color20, drawPlayer.bodyRotation, new Vector2(Main.wingsTexture[drawPlayer.wings].Width / 2, Main.wingsTexture[drawPlayer.wings].Height / 14), 1f, spriteEffects, 0);
+                value.shader = shader12;
+                Main.playerDrawData.Add(value);
+            }
+
+        }
+
+        public override void ModifyScreenPosition()
+        {
+            if (TenebraeModWorld.InpuratusDies == true)
+            {
+                InpuratusDeathShake++;
+                float intensity = 10f;
+                if (InpuratusDeathShake >= 1)
+                {
+                    Main.screenPosition += new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    Main.screenPosition -= new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    intensity *= 0.9f;
+                    if (InpuratusDeathShake == 30)
+                    {
+                        TenebraeModWorld.InpuratusDies = false;
+                        InpuratusDeathShake = 0;
+                    }
+                }
+            }
+
+            if (TenebraeModWorld.DashShake == true)
+            {
+                DashShakeTimer++;
+                float intensity = 3f;
+                if (DashShakeTimer >= 1)
+                {
+                    Main.screenPosition += new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    Main.screenPosition -= new Vector2(Main.rand.NextFloat(intensity), Main.rand.NextFloat(intensity));
+                    intensity *= 0.9f;
+                    if (DashShakeTimer == 15)
+                    {
+                        TenebraeModWorld.DashShake = false;
+                        DashShakeTimer = 0;
+                    }
+                }
+            }
+        }
+
         public bool holyflames;
         int holydamage = 0;
 
         public override void ResetEffects() {
 			holyflames = false;
 		}
-
-		public override void PreUpdateBuffs() {
-			fleshGauntlet = false;
-        }
-
-        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit) {
-            if (Main.rand.NextBool(7)) {target.AddBuff(ModContent.BuffType<Berserked>(),7*60);}
-        }
-
-        public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit) {
-            if (Main.rand.NextBool(7)) {target.AddBuff(ModContent.BuffType<Berserked>(),7*60);}
-        }
-
-        public override void OnHitPvp(Item item, Player target, int damage, bool crit) {
-            if (Main.rand.NextBool(7)) {target.AddBuff(ModContent.BuffType<Berserked>(),7*60);}
-        }
-
-        public override void OnHitPvpWithProj(Projectile proj, Player target, int damage, bool crit) {
-            if (Main.rand.NextBool(7)) {target.AddBuff(ModContent.BuffType<Berserked>(),7*60);}
-        }
 
         public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
         {

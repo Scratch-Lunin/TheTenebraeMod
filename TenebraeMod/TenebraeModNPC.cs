@@ -43,17 +43,5 @@ namespace TenebraeMod
                     break;
             }
         }
-
-        public override void ModifyHitNPC(NPC npc, NPC target, ref int damage, ref float knockback, ref bool crit) {
-            if (npc.HasBuff(BuffType<Berserked>())) {
-                damage = (int)(damage*0.75f);
-            }
-        }
-
-        public override void ModifyHitPlayer(NPC npc, Player target, ref int damage, ref bool crit) {
-            if (npc.HasBuff(BuffType<Berserked>())) {
-                damage = (int)(damage*0.75f);
-            }
-        }
     }
 }
