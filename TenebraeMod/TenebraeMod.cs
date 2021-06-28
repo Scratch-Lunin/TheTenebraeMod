@@ -84,10 +84,5 @@ namespace TenebraeMod
            });
             RecipeGroup.RegisterGroup("TenebraeMod:UnsafePinkBrickWall", unsafepinkbrickwall);
         }
-        public override void Load()
-        {
-            Main.logoTexture = ModContent.GetTexture("TenebraeMod/Properties/Logo");
-            Main.logo2Texture = ModContent.GetTexture("TenebraeMod/Properties/Logo2");
-        }
     }
 }
