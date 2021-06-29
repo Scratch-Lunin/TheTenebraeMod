@@ -15,8 +15,6 @@ namespace TenebraeMod {
         public override bool InstancePerEntity => true;
         public override bool CloneNewInstances => true;
 
-        RecipeFinder finder = new RecipeFinder();
-
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
@@ -288,7 +286,7 @@ namespace TenebraeMod {
             recipe.SetResult(ItemID.LavaCharm);
             recipe.AddRecipe();
 
-            recipe = new ModRecipe(mod);
+            recipe = new ModRecipe(mod); // New Ankh Shield recipe with Blind Man's Glasses and Hand Warmer
             recipe.AddIngredient(ItemID.ArmorBracing);
             recipe.AddIngredient(ItemID.MedicatedBandage);
             recipe.AddIngredient(ItemID.ThePlan);
@@ -305,8 +303,7 @@ namespace TenebraeMod {
             recipe.SetResult(ItemID.BrokenHeroSword);
             recipe.AddRecipe();
 
-
-            finder = new RecipeFinder();
+            RecipeFinder finder = new RecipeFinder(); // Removing vanilla Ankh Shield recipe
             finder.AddIngredient(ItemID.Blindfold);
             finder.AddIngredient(ItemID.ArmorBracing);
             finder.AddIngredient(ItemID.MedicatedBandage);
@@ -366,16 +363,26 @@ namespace TenebraeMod {
             if (item.type == ItemID.MedicatedBandage)
             {
                 player.buffImmune[BuffID.Rabies] = true;
+                player.buffImmune[BuffID.Venom] = true;
+            }
+
+            if (item.type == ItemID.ArmorBracing)
+            {
+                player.buffImmune[BuffID.Webbed] = true;
             }
 
             if (item.type == ItemID.AnkhCharm)
             {
                 player.buffImmune[BuffID.Rabies] = true;
+                player.buffImmune[BuffID.Webbed] = true;
+                player.buffImmune[BuffID.Venom] = true;
             }
 
             if (item.type == ItemID.AnkhShield)
             {
                 player.buffImmune[BuffID.Rabies] = true;
+                player.buffImmune[BuffID.Webbed] = true;
+                player.buffImmune[BuffID.Venom] = true;
             }
         }
 
