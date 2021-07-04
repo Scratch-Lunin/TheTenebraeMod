@@ -24,12 +24,12 @@ namespace TenebraeMod.Projectiles.Melee
         }
         public override void AI()
         {
-            if (boneTimer < 120)
+            if (boneTimer < 40)
             {
                 boneTimer += 1;
                 if (boneTimer % 7 == 0)
                 {
-                    var proj = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, (float)-0.5, ModContent.ProjectileType<SkelerangBone>(), (int)(projectile.damage * 0.75), projectile.knockBack, projectile.owner, projectile.whoAmI);
+                    var proj = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, (float)-0.5, ModContent.ProjectileType<SkelerangBone>(), (int)(projectile.damage * 0.5), projectile.knockBack, projectile.owner, projectile.whoAmI);
                     Main.projectile[proj].rotation = Main.rand.Next(180); // Use an actual rotation instead of PI
                 }
             }
