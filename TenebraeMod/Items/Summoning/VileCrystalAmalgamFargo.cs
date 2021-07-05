@@ -6,12 +6,12 @@ using Terraria.ModLoader;
 
 namespace TenebraeMod.Items.Summoning
 {
-	public class VileCrystalAmalgam : ModItem
+	public class VileCrystalAmalgamFargo : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Vile Crystal Amalgam");
-			Tooltip.SetDefault("Filled with corrupted energy"+"\nSummons Inpuratus when used in the Underground Corruption");
+			DisplayName.SetDefault("Amalgam of Vile Crystals");
+			Tooltip.SetDefault("Filled with corrupted energy"+"\nSummons Inpuratus");
 			ItemID.Sets.SortingPriorityBossSpawns[item.type] = 13;
 		}
 
@@ -31,7 +31,7 @@ namespace TenebraeMod.Items.Summoning
 		public override bool CanUseItem(Player player)
 		{
 			// "player.ZoneUnderworldHeight" could also be written as "player.position.Y / 16f > Main.maxTilesY - 200"
-			return Main.hardMode && player.ZoneCorrupt && player.ZoneRockLayerHeight && !NPC.AnyNPCs(ModContent.NPCType<NPCs.Inpuratus>());
+			return Main.hardMode && !NPC.AnyNPCs(ModContent.NPCType<NPCs.Inpuratus>());
 		}
 
 		public override bool UseItem(Player player)
