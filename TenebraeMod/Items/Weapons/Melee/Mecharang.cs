@@ -10,7 +10,7 @@ namespace TenebraeMod.Items.Weapons.Melee
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Mecharang");
-            Tooltip.SetDefault("'Now the rib shoots lasers...?'");
+            Tooltip.SetDefault("Fires death lasers at nearby enemies");
         }
 
         public override void SetDefaults() {
