@@ -22,11 +22,10 @@ namespace TenebraeMod.Projectiles.Melee
 			projectile.aiStyle = 3;
 			projectile.friendly = true;
 			projectile.melee = true;
-			projectile.penetrate = 6;
             projectile.timeLeft = 800;
-            projectile.light = 0.8f;
             projectile.extraUpdates = 2;
 			projectile.maxPenetrate = 6;
+            projectile.penetrate = 6;
 		}
 
         public override void AI()
@@ -60,7 +59,7 @@ namespace TenebraeMod.Projectiles.Melee
                     Vector2 shotVelocity = target.Center - projectile.Center;
                     shotVelocity.Normalize();
                     shotVelocity *= 16;
-                    int shot = Projectile.NewProjectile(projectile.Center, shotVelocity, ProjectileID.MiniRetinaLaser, projectile.damage, projectile.knockBack, projectile.owner);
+                    int shot = Projectile.NewProjectile(projectile.Center, shotVelocity, ModContent.ProjectileType<MecharangLaser>(), projectile.damage, projectile.knockBack, projectile.owner);
                     Main.projectile[shot].minion = false;
                     Main.projectile[shot].melee = true; 
                 }
@@ -68,4 +67,20 @@ namespace TenebraeMod.Projectiles.Melee
             }
         }
 	}
+    public class MecharangLaser : ModProjectile
+    {
+        public override void SetDefaults()
+        {
+            projectile.width = 2;
+            projectile.height = 60;
+            projectile.aiStyle = 1;
+            aiType = ProjectileID.DeathLaser;
+            projectile.friendly = true;
+            projectile.melee = true;
+            projectile.timeLeft = 800;
+            projectile.light = 1f;
+            projectile.extraUpdates = 2;
+            projectile.maxPenetrate = 3;
+        }
+    }
 }
