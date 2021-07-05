@@ -87,7 +87,7 @@ namespace TenebraeMod.NPCs
                 Item.NewItem(npc.position, ItemID.CursedFlame, 20 + Main.rand.Next(10));
                 Item.NewItem(npc.position, ItemID.RottenChunk, 50 + Main.rand.Next(10));
                 var dropChooser = new WeightedRandom<int>();
-                dropChooser.Add(ItemID.ClingerStaff, 5);
+                dropChooser.Add(ModContent.ItemType<Items.Weapons.Mage.CursefernoBurst>(), 5);
                 dropChooser.Add(ModContent.ItemType<Items.Weapons.Melee.VileGlaive>(), 5);
                 dropChooser.Add(ModContent.ItemType<Items.Weapons.Ranger.CursedCarbine>(), 5);
                 int choice = dropChooser;
@@ -99,6 +99,7 @@ namespace TenebraeMod.NPCs
             if (npc.life <= 0)
             {
                 TenebraeModWorld.InpuratusDies = true;
+                TenebraeModWorld.downedInpuratus = true;
                 for (int i = 0; i < 8; i++)
                 {
                     Gore.NewGore(npc.position, npc.velocity, mod.GetGoreSlot("Gores/InpuratusGore" + i), npc.scale);
