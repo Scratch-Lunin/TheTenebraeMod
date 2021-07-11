@@ -20,14 +20,14 @@ namespace TenebraeMod.Items.Weapons.Melee
 		{
 			item.damage = 50000;
 			item.melee = true;
-			item.width = 46;
-			item.height = 50;
+			item.width = 44;
+			item.height = 52;
 			item.useTime = 20;
 			item.useAnimation = 20;
 			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.knockBack = 2;
-			item.value = 66112214;
-			item.rare = ItemRarityID.Expert;
+			Item.sellPrice(66, 11, 22, 14);
+			item.rare = -20;
 			item.UseSound = SoundID.Item71;
 			item.autoReuse = true;
 			item.shootSpeed = 0.8f;
@@ -35,7 +35,7 @@ namespace TenebraeMod.Items.Weapons.Melee
 		}
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
-			target.AddBuff(ModContent.BuffType<Buffs.WarriorsAnimosity>(), 216000, true);
+			target.AddBuff(ModContent.BuffType<Buffs.WarriorsAnimosity>(), 600, true);
 		}
 		public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
         {
