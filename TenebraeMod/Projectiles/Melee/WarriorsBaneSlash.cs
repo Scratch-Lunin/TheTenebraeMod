@@ -54,7 +54,7 @@ namespace TenebraeMod.Projectiles.Melee
 		}
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{ // TODO: Add OnHitPlayer method for PVP?
-			target.AddBuff(ModContent.BuffType<Buffs.WarriorsAnimosity>(), 216000, true);
+			target.AddBuff(ModContent.BuffType<Buffs.WarriorsAnimosity>(), 600, true);
 		}
 	}
 }
