@@ -21,6 +21,14 @@ namespace TenebraeMod.Buffs
 		{
 			npc.life -= (int)(npc.life * 0.1f);
 			npc.defense = 0;
+			npc.GetGlobalNPC<NPCDebuffs>().warriordebuff = true;
 		}
-    }
+
+		public override void Update(Player player, ref int buffIndex)
+		{
+			player.GetModPlayer<TenebraeModPlayer>().warriordebuff = true;
+			player.statLife -= (int)(player.statLife * 0.1f);
+			player.statDefense = 0;
+		}
+	}
 }
