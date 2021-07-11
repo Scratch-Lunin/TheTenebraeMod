@@ -10,7 +10,7 @@ namespace TenebraeMod.Items.Weapons.Melee
     {
         public override void SetStaticDefaults() {
             DisplayName.SetDefault("Skelerang");
-            Tooltip.SetDefault("'It's just an extremely bent rib.'");
+            Tooltip.SetDefault("Leaves a trail of falling bones in its path");
         }
 
         public override void SetDefaults() {
