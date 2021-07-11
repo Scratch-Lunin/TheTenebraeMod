@@ -98,10 +98,12 @@ namespace TenebraeMod
         }
 
         public bool holyflames;
+        public bool warriordebuff;
         int holydamage = 0;
 
         public override void ResetEffects() {
 			holyflames = false;
+            warriordebuff = false;
 		}
 
         public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
@@ -134,9 +136,29 @@ namespace TenebraeMod
 			else {
 				holydamage = 0;
 			}
-		}
+            if (warriordebuff)
+            {
+                if (player.statLife < 10)
+                {
+                    if (player.lifeRegen > 0)
+                    {
+                        player.lifeRegen = 0;
+                    }
+                    player.lifeRegen -= player.statLife * 10;
+                }
+            }
+        }
 
-		public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            if (damage == 10.0 && hitDirection == 0 && damageSource.SourceOtherIndex == 8 && player.HasBuff(ModContent.BuffType<WarriorsAnimosity>()) )
+            {
+                damageSource = PlayerDeathReason.ByCustomReason(player.name +   "'s soul was claimed by the Warrior");
+            }
+            return true;
+        }
+
+        public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright) {
 			if (holyflames) {
 				if (Main.rand.NextBool(3) && drawInfo.shadow == 0f) {
 					int dust = Dust.NewDust(drawInfo.position - new Vector2(2f, 2f), player.width + 4, player.height + 4, ModContent.DustType<HolyflameDust>(), player.velocity.Y * 0.4f, player.velocity.Y * 0.4f, 100, default(Color), 5f);
@@ -148,6 +170,16 @@ namespace TenebraeMod
 				b *= 0.3f;
 				fullBright = true;
 			}
-		}
+            if (warriordebuff)
+            {
+                if (Main.rand.NextBool(4) && drawInfo.shadow == 0f)
+                {
+                    int dust = Dust.NewDust(drawInfo.position - new Vector2(2f, 2f), player.width + 4, player.height + 4, 271, 0f, 0f, 100, new Color(255, 0, 0), 1f);
+                    Main.dust[dust].noGravity = true;
+                    dust = Dust.NewDust(drawInfo.position - new Vector2(2f, 2f), player.width + 4, player.height + 4, 270, 0f, 0f, 100, new Color(255, 0, 0), .8f);
+                    Main.dust[dust].noGravity = true;
+                }
+            }
+        }
     }
 }

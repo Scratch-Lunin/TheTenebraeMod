@@ -332,7 +332,26 @@ namespace TenebraeMod {
                         }
                     }
                     break;
+                case -20:
+                    foreach (TooltipLine line in tooltips)
+                    {
+                        if (line.mod == "Terraria" && line.Name == "ItemName")
+                        {
+                            TenebraeModWorld.timer++;
+                            if (TenebraeModWorld.timer == 380)
+                            {
+                                TenebraeModWorld.timer = 0;
+                            }
+                            int r = 255;
+                            int g = (int)(100 * (1 + Math.Sin(TenebraeModWorld.timer / 60f)));
+                            int b = 0;
+                            line.overrideColor = new Color(r, g, b);
+                        }
+                    }
+                    break;
             }
+
+
 
             if (item.type == ItemID.MedicatedBandage)
             {
