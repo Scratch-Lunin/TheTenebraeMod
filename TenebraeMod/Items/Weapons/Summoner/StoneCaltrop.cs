@@ -17,9 +17,8 @@ namespace TenebraeMod.Items.Weapons.Summoner
 
 		public override void SetDefaults()
 		{
-			item.damage = 7;
+			item.damage = 3;
 			item.knockBack = 0f;
-			item.mana = 5;
 			item.width = 24;
 			item.height = 40;
 			item.useTime = 30;
