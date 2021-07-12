@@ -22,7 +22,7 @@ namespace TenebraeMod.Items.Weapons.Mage
             item.useAnimation = 80;
             item.useStyle = ItemUseStyleID.HoldingOut;
             item.autoReuse = true;
-            item.UseSound = SoundID.Item20;
+            item.UseSound = SoundID.Item104;
             item.knockBack = 5;
             item.value = Item.sellPrice(0, 15, 0, 0);
             item.rare = ItemRarityID.Green;
