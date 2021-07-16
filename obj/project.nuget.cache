@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zEySiuM2FG7KYYcDfyDoHDEdl02+jOijFtr/JB0xRqerYY48z2Gao7V/jpjtCq7JFmosTAXiyAXQybxK+Wap7Q==",
+  "dgSpecHash": "L4DT8yP6i5hiikCJE5nmbuKS0lX3If0TqoO6/CTCEpYWNszuwVOZ9t2ta9NJTbi/PCv0mEHcyFEnzEvDkW0Lrw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gweik\\OneDrive\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\TenebraeMod\\TenebraeMod.csproj",
+  "projectFilePath": "C:\\Users\\Mint\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\TenebraeMod\\TenebraeMod.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\gweik\\.nuget\\packages\\tmodloader.codeassist\\0.1.1\\tmodloader.codeassist.0.1.1.nupkg.sha512"
+    "C:\\Users\\Mint\\.nuget\\packages\\tmodloader.codeassist\\0.1.2\\tmodloader.codeassist.0.1.2.nupkg.sha512"
   ],
   "logs": []
 }
