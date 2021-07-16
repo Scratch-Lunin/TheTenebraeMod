@@ -34,7 +34,7 @@ namespace TenebraeMod
     {
         public override bool InstancePerEntity => true;
 
-        public override void NPCLoot(NPC npc) {
+        /*public override void NPCLoot(NPC npc) {
             switch(npc.type) {
                 case NPCID.BlackRecluse:
                     if (Main.expertMode ? Main.rand.NextBool(25) : Main.rand.NextBool(50)) {
@@ -42,6 +42,6 @@ namespace TenebraeMod
                     }
                     break;
             }
-        }
+        }*/
     }
 }
