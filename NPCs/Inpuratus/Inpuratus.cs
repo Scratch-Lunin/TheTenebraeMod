@@ -4,6 +4,7 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria.Graphics.Shaders;
+using TenebraeMod.Projectiles.Inpuratus;
 using IL.Terraria.DataStructures;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,9 +12,8 @@ namespace TenebraeMod.NPCs.Inpuratus
 {
     public class Inpuratus : ModNPC
     {
-        float cen = 0f;
+        float dead = 0;
         Vector2[] FootPositions = new Vector2[4] { Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero };
-        Vector2[] FootPositionAdds = new Vector2[4] { Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero };
 
         #region Wrappers and Enums
         public AttackState CurrentAttackState
@@ -25,9 +25,17 @@ namespace TenebraeMod.NPCs.Inpuratus
                 npc.netUpdate = true;
             }
         }
+        public ref float AttackTimer => ref npc.ai[1];
         public enum AttackState
         {
-            JustMoving = 0
+            JustMoving = 0,
+            Fireball = 1,
+            Dashing = 2,
+            StompDown = 3,
+            HomingSac = 4,
+            SlowingSpread = 5,
+            StompUp = 6,
+            FireBreath = 7
         }
         public enum MovementState
         {
@@ -62,6 +70,7 @@ namespace TenebraeMod.NPCs.Inpuratus
             npc.defense = 11;
             npc.scale = 1f;
             npc.damage = 23;
+            npc.boss = true;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath1;
         }
@@ -72,25 +81,145 @@ namespace TenebraeMod.NPCs.Inpuratus
 
             Player player = Main.player[npc.target];
 
+
             float vel = (float)Math.Sqrt(Math.Pow(npc.velocity.X, 2) + Math.Pow(npc.velocity.Y, 2));
 
             float rot = npc.AngleFrom(player.Center) + MathHelper.ToRadians(90f);
 
             Vector2 targetPosition;
 
-
-            if (CurrentAttackState == AttackState.JustMoving)
+            if (player.dead)
             {
-                targetPosition = FindCaveMid(player.Center);
-                float dist = npc.Distance(targetPosition);
-                npc.velocity = Vector2.Lerp(npc.velocity, npc.DirectionTo(targetPosition) * dist * 0.005f, 0.2f);
-                if (vel > 10) npc.velocity *= 0.95f;
-                if (vel > 15) npc.velocity *= 0.95f;
+                dead++;
+
+                npc.velocity.X *= 0.995f;
+                npc.velocity.Y += 0.06f;
+
+                if (dead > 60 && npc.Distance(player.Center) > 2000)
+                {
+                    npc.active = false;
+                }
             }
+            else
+            {
+                AttackTimer++;
+
+                if (CurrentAttackState == AttackState.JustMoving)
+                {
+                    targetPosition = FindCaveMid(player.Center);
+                    float dist = npc.Distance(targetPosition);
+                    npc.velocity = Vector2.Lerp(npc.velocity, npc.DirectionTo(targetPosition) * dist * 0.05f, 0.2f);
+                    if (vel > 10) npc.velocity *= 0.95f;
+                    if (vel > 15) npc.velocity *= 0.95f;
+
+                    if (AttackTimer > 150)
+                    {
+                        CurrentAttackState = AttackState.Fireball;
+                        AttackTimer = 0;
+                    }
+                }
+                if (CurrentAttackState == AttackState.Fireball)
+                {
+                    npc.velocity *= 0.97f;
+                    if (AttackTimer <= 120 && AttackTimer >= 60)
+                    {
+                        targetPosition = FindCaveMid(player.Center);
+                        npc.velocity *= 0.97f;
+                        if (AttackTimer % 15 == 0)
+                        {
+                            Vector2 v = npc.DirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-10, 11))) * 2;
+                            npc.velocity += -v * 0.2f;
+                            Projectile.NewProjectile(npc.Center + (v * 45f), v, ModContent.ProjectileType<InpuratusBigFireball>(), 17, 6f);
+                            Projectile.NewProjectile(npc.Center + (v * 45f), Vector2.Zero, ModContent.ProjectileType<CursedExplosion>(), 17, 6f);
+                            Main.PlaySound(SoundID.Item73, (int)npc.Center.X, (int)npc.Center.Y);
+                        }
+                        else
+                        {
+                            npc.velocity = Vector2.Lerp(npc.velocity, npc.DirectionTo(targetPosition) * 5, 0.12f);
+                        }
+                    }
+                    if (AttackTimer > 130)
+                    {
+                        AttackTimer = 0;
+                        CurrentAttackState = AttackState.Dashing;
+                    }
+                }
+                if (CurrentAttackState == AttackState.Dashing)
+                {
+                    float dashCounter = 90;
+                    if (AttackTimer % dashCounter < 20)
+                    {
+                        npc.velocity += player.DirectionTo(npc.Center) * 0.3f;
+                        npc.velocity *= 0.96f;
+                    }
+                    else if (AttackTimer % dashCounter == 20)
+                    {
+                        npc.velocity = npc.DirectionTo(player.Center) * 15;
+                        Main.PlaySound(SoundID.ForceRoar, npc.Center, 0);
+                    }
+                    else if (AttackTimer % dashCounter < dashCounter - 20 && AttackTimer % 6 == 0)
+                    {
+                        Main.PlaySound(SoundID.Item73, (int)npc.Center.X, (int)npc.Center.Y);
+                        Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<CursedExplosion>(), 18, 5f);
+                        Projectile.NewProjectile(npc.Center, Vector2.Zero, ModContent.ProjectileType<InpuratusStillFireball>(), 18, 5f);
+                    }
+                    if (AttackTimer >= dashCounter * 4)
+                    {
+                        AttackTimer = 0;
+                        CurrentAttackState = AttackState.JustMoving;
+                    }
+                }
+                if (CurrentAttackState == AttackState.HomingSac)
+                {
+
+                }
+            }
+            
             npc.rotation = rot;
 
-            //if (MovementState.Leggy)
             for (int i = 0; i < 4; i++)
+            {
+                Vector2 addon = new Vector2(-1, -1).RotatedBy(MathHelper.ToRadians(i * 90));
+                //addon.X /= 6f;
+                //addon.Y /= 2f;
+
+                float sign = Math.Sign(addon.X);
+                addon.X = 0;
+
+                float[] scanarray2 = new float[3];
+                float dist2 = 200;
+                Collision.LaserScan(FindCenterLeg(i), new Vector2(sign, i < 2 ? -0.5f : 0.5f), 0, dist2, scanarray2);
+
+                dist2 = 0;
+                foreach (float scan in scanarray2)
+                {
+                    dist2 += (scan / scanarray2.Length);
+                }
+
+
+                float[] scanarray = new float[3];
+                float distance = 800;
+                Collision.LaserScan(FindCenterLeg(i) + new Vector2(sign * dist2, 0), addon, 0, distance, scanarray);
+
+                distance = 0;
+                foreach (float scan in scanarray)
+                {
+                    distance += (scan / scanarray.Length);
+                }
+
+
+                Vector2 dest = new Vector2((float)Math.Floor((FindCenterLeg(i) + new Vector2(sign * dist2, 0) + (addon * distance)).X / 16) * 16, (float)Math.Floor((FindCenterLeg(i) + new Vector2(sign * 200, 0) + (addon * distance)).Y / 16) * 16);
+
+                float posneg = -1;
+                if (i < 2) posneg = 1;
+
+                float vel10 = MathHelper.Clamp(vel / 10, 1f, 3f);
+
+                FootPositions[i] = Vector2.Lerp(FootPositions[i], dest, 0.17f * vel10);
+                FootPositions[i].Y += Math.Abs((dest - FootPositions[i]).X) / 13 * posneg * vel10;
+            }
+
+            /*for (int i = 0; i < 4; i++)
             {
                 Vector2 addon = new Vector2(-1, -1).RotatedBy(MathHelper.ToRadians(i * 90));
                 //addon.X /= 6f;
@@ -116,7 +245,7 @@ namespace TenebraeMod.NPCs.Inpuratus
 
                 FootPositions[i] = Vector2.Lerp(FootPositions[i], dest, 0.22f);
                 FootPositions[i].Y += Math.Abs((dest - FootPositions[i]).X) / 10 * posneg;
-            }
+            }*/
 
             /*npc.ai[2]++;
             {
@@ -274,7 +403,7 @@ namespace TenebraeMod.NPCs.Inpuratus
 
         Vector2 FindCenterLeg(int legID)
         {
-            Player player = Main.player[npc.target];
+            Vector2 addon = new Vector2(-150, -150).RotatedBy(MathHelper.ToRadians(legID * 90));
 
             bool bl = legID % 2 == 1;
 
@@ -283,8 +412,8 @@ namespace TenebraeMod.NPCs.Inpuratus
             {
                 pos = bl ? new Vector2((float)Math.Round(npc.Center.X / 400) * 400, npc.Center.Y) : new Vector2((float)Math.Round((npc.Center.X / 400) + 0.5f) * 400, npc.Center.Y);
             }
-
-            pos.Y = MathHelper.Lerp(player.Center.Y, npc.Center.Y, 0.5f);
+            pos.Y = bl ? (float)Math.Round(npc.Center.Y / 300) * 300 : (float)Math.Round((npc.Center.Y / 300) + 0.5f) * 300;
+            pos += addon;
 
             return pos;
         }
