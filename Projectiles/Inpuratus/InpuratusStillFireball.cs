@@ -60,7 +60,7 @@ namespace TenebraeMod.Projectiles.Inpuratus
 
 			spriteBatch.End();
 			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, null, null, null, null, Main.GameViewMatrix.ZoomMatrix);
-				for (int i = 0; i < projectile.oldPos.Length; i++)
+			for (int i = 0; i < projectile.oldPos.Length; i++)
 				{
 					spriteBatch.Draw(Main.projectileTexture[projectile.type], projectile.oldPos[i] + new Vector2(projectile.width / 2, projectile.height / 2) - Main.screenPosition,
 					new Rectangle(0, frame, 26, 60), Color.Lerp(Color.DarkOliveGreen, Color.DarkSlateGray, (float)i / (float)projectile.oldPos.Length), projectile.rotation,

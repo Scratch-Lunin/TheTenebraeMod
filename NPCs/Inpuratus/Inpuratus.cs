@@ -12,6 +12,7 @@ namespace TenebraeMod.NPCs.Inpuratus
 {
     public class Inpuratus : ModNPC
     {
+        bool start = false;
         float dead = 0;
         Vector2[] FootPositions = new Vector2[4] { Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero };
 
@@ -54,11 +55,6 @@ namespace TenebraeMod.NPCs.Inpuratus
 
         public override void SetDefaults()
         {
-            for (int i = 0; i < 4; i++)
-            {
-                FootPositions[i] = npc.Center;
-            }
-
             npc.aiStyle = -1;
             npc.noTileCollide = true;
             npc.noGravity = true;
@@ -77,10 +73,18 @@ namespace TenebraeMod.NPCs.Inpuratus
 
         public override void AI()
         {
+            if (!start)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    FootPositions[i] = npc.Center;
+                }
+                start = true;
+            }
+
             npc.TargetClosest();
 
             Player player = Main.player[npc.target];
-
 
             float vel = (float)Math.Sqrt(Math.Pow(npc.velocity.X, 2) + Math.Pow(npc.velocity.Y, 2));
 
@@ -166,12 +170,30 @@ namespace TenebraeMod.NPCs.Inpuratus
                     if (AttackTimer >= dashCounter * 4)
                     {
                         AttackTimer = 0;
-                        CurrentAttackState = AttackState.JustMoving;
+                        CurrentAttackState = AttackState.HomingSac;
                     }
                 }
                 if (CurrentAttackState == AttackState.HomingSac)
                 {
+                    targetPosition = player.Center + new Vector2(0, -600).RotatedBy(player.AngleTo(npc.Center) + MathHelper.ToRadians(0.01f));
+                    float dist = npc.Distance(targetPosition);
+                    npc.velocity = Vector2.Lerp(npc.velocity, npc.DirectionTo(targetPosition) * dist * 0.07f, 0.2f);
+                    if (vel > 10) npc.velocity *= 0.95f;
+                    if (vel > 15) npc.velocity *= 0.95f;
 
+                    if (AttackTimer % 40 == 0 && AttackTimer > 80)
+                    {
+                        float aitwo = 1 + Main.rand.NextFloat(0.01f, 0.07f);
+                        if (Main.rand.NextBool(2)) aitwo = -aitwo;
+
+                        int sac = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, ModContent.NPCType<CursedSac>(), ai2: aitwo);
+                        Main.npc[sac].velocity = player.DirectionTo(npc.Center).RotatedBy(MathHelper.ToRadians(Main.rand.Next(-60, 61))) * 9f;
+                    }
+                    if (AttackTimer > 300)
+                    {
+                        AttackTimer = 0;
+                        CurrentAttackState = AttackState.JustMoving;
+                    }
                 }
             }
             

@@ -41,7 +41,7 @@ namespace TenebraeMod.Projectiles.Inpuratus
 			projectile.velocity *= 1.04f;
 			projectile.ai[0] += 1f;
 			projectile.rotation = (float)Math.Atan2(projectile.velocity.Y, projectile.velocity.X) - 1.57f;
-        }
+		}
 
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -60,7 +60,7 @@ namespace TenebraeMod.Projectiles.Inpuratus
 					spriteBatch.Draw(Main.projectileTexture[projectile.type], projectile.oldPos[i] + new Vector2(projectile.width / 2, projectile.height / 2) - Main.screenPosition,
 					new Rectangle(0, frame, 26, 60), Color.Lerp(Color.DarkOliveGreen, Color.DarkSlateGray, (float)i / (float)projectile.oldPos.Length), projectile.rotation,
 					new Vector2(26 * 0.5f, 60 * 0.5f), Vector2.Lerp(new Vector2(1f, 1f), new Vector2(0, 0), (float)i / (float)projectile.oldPos.Length), SpriteEffects.None, 0f);
-				}
+			}
 			spriteBatch.Draw(Main.projectileTexture[projectile.type], projectile.position + new Vector2(projectile.width / 2, projectile.height / 2) - Main.screenPosition,
 			   new Rectangle(0, frame, 26, 60), Color.LimeGreen, projectile.rotation,
 			   new Vector2(26 * 0.5f, 60 * 0.5f), 1f, SpriteEffects.None, 0f);
