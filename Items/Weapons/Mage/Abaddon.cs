@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TenebraeMod.Items.Weapons.Mage
 {
-    public class Darklight : ModItem
+    public class Abaddon : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darklight");
+            DisplayName.SetDefault("Abaddon");
             Tooltip.SetDefault("Summons blades from below the cursor");
         }
 
@@ -22,8 +22,8 @@ namespace TenebraeMod.Items.Weapons.Mage
             item.damage = 40;
             item.magic = true;
             item.mana = 15;
-            item.width = 34;
-            item.height = 36;
+            item.width = 30;
+            item.height = 42;
             item.useTime = 35;
             item.useAnimation = 35;
             item.useStyle = ItemUseStyleID.HoldingOut;
@@ -33,7 +33,7 @@ namespace TenebraeMod.Items.Weapons.Mage
             item.rare = ItemRarityID.Blue;
             item.UseSound = SoundID.Item8;
             item.autoReuse = true;
-            item.shoot = ProjectileType<DarklightSword>();
+            item.shoot = ProjectileType<AbaddonSword>();
             item.shootSpeed = 16f;
         }
 
@@ -57,29 +57,31 @@ namespace TenebraeMod.Items.Weapons.Mage
         {
             ModRecipe recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemType<ShadeSphere>());
-            recipe.AddIngredient(ItemType<StingNeedle>());
-            recipe.AddIngredient(ItemType<BookofHellflame>());
             recipe.AddIngredient(ItemID.WaterBolt);
+            recipe.AddIngredient(ItemID.DemonScythe);
+            recipe.AddIngredient(ItemID.JungleSpores, 15);
+            recipe.AddIngredient(ItemID.FallenStar, 10);
             recipe.AddTile(TileID.DemonAltar);
             recipe.SetResult(this);
             recipe.AddRecipe();
 
             recipe = new ModRecipe(mod);
             recipe.AddIngredient(ItemType<Bloodbane>());
-            recipe.AddIngredient(ItemType<StingNeedle>());
-            recipe.AddIngredient(ItemType<BookofHellflame>());
             recipe.AddIngredient(ItemID.WaterBolt);
+            recipe.AddIngredient(ItemID.DemonScythe);
+            recipe.AddIngredient(ItemID.JungleSpores, 15);
+            recipe.AddIngredient(ItemID.FallenStar, 10);
             recipe.AddTile(TileID.DemonAltar);
             recipe.SetResult(this);
             recipe.AddRecipe();
         }
     }
 
-    public class DarklightSword : ModProjectile
+    public class AbaddonSword : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Darklight Blade");
+            DisplayName.SetDefault("Abaddon Blade");
             Main.projFrames[projectile.type] = 4;
         }
 
